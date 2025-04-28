@@ -1,76 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Passenger Check</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .container {
-      max-width: 400px;
-      margin: 0 auto;
-      text-align: center;
-    }
-    input {
-      padding: 10px;
-      width: 80%;
-      margin: 10px 0;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: #45a049;
-    }
-  </style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Bethany Tour 2025</title>
+    <style>
+      body {
+        font-family: "Ubuntu", sans-serif;
+      }
+      /* main div */
+      .container {
+        height: 100dvh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+        text-align: center;
+      }
 
-  <div class="container">
-    <h1>Passenger Check</h1>
-    <input type="text" id="name" placeholder="Enter your name" />
-    <button onclick="checkName()">Check Name</button>
+      /* Form contents */
 
-    <p id="result"></p>
-    <button id="confirmButton" style="display:none;" onclick="confirmAvailability()">Confirm Availability</button>
-  </div>
-
-  <script>
-    const url = "https://script.google.com/macros/s/AKfycby1eWbhbYFF-NrMkGr1c99eQHl5LXry9PG7AzXPC6oRc9JH4OO95MinxshxLmvatvcNVQ/exec"; // Replace with the URL from Google Apps Script
-
-    function checkName() {
-      const name = document.getElementById('name').value;
-      fetch(`${url}?name=${name}`)
-        .then(response => response.text())
-        .then(result => {
-          document.getElementById('result').textContent = result;
-          if (result === "You are not confirmed yet. Click to confirm.") {
-            document.getElementById('confirmButton').style.display = 'inline';
-          } else {
-            document.getElementById('confirmButton').style.display = 'none';
-          }
-        });
+    .form-heading {
+        font-size: 35px;
+        font-weight: 500;
     }
 
-    function confirmAvailability() {
-      const name = document.getElementById('name').value;
-      const confirmUrl = `${url}?name=${name}`;
+      input {
+        padding: 10px;
+        width: 80%;
+        margin: 10px 0;
+        border: none;
+        box-shadow: 2px 3px 14px grey;
+        border-radius: 15px;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin: 20px 0;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="form-contents">
+        <h1 class="form-heading">Passenger Check</h1>
+        <input type="text" id="name" placeholder="Enter your name" />
+        <button onclick="checkName()">Check Name</button>
 
-      fetch(confirmUrl, { method: 'POST' })
-        .then(response => response.text())
-        .then(result => {
-          document.getElementById('result').textContent = "Confirmation received!";
-          document.getElementById('confirmButton').style.display = 'none';
-        });
-    }
-  </script>
+        <p id="result"></p>
+        <button
+          id="confirmButton"
+          style="display: none"
+          onclick="confirmAvailability()"
+        >
+          Confirm Availability
+        </button>
+      </div>
+    </div>
 
-</body>
+    <script>
+      const url =
+        "https://script.google.com/macros/s/AKfycby1eWbhbYFF-NrMkGr1c99eQHl5LXry9PG7AzXPC6oRc9JH4OO95MinxshxLmvatvcNVQ/exec"; // Replace with the URL from Google Apps Script
+
+      function checkName() {
+        const name = document.getElementById("name").value;
+        fetch(`${url}?name=${name}`)
+          .then((response) => response.text())
+          .then((result) => {
+            document.getElementById("result").textContent = result;
+            if (result === "You are not confirmed yet. Click to confirm.") {
+              document.getElementById("confirmButton").style.display = "inline";
+            } else {
+              document.getElementById("confirmButton").style.display = "none";
+            }
+          });
+      }
+
+      function confirmAvailability() {
+        const name = document.getElementById("name").value;
+        const confirmUrl = `${url}?name=${name}`;
+
+        fetch(confirmUrl, { method: "POST" })
+          .then((response) => response.text())
+          .then((result) => {
+            document.getElementById("result").textContent =
+              "Confirmation received!";
+            document.getElementById("confirmButton").style.display = "none";
+          });
+      }
+    </script>
+  </body>
 </html>
