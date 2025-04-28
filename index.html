@@ -126,8 +126,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background-color: white;
-        padding: 20px 30px;
+        background-color: rgb(213, 255, 254);
+        padding: 30px 40px;
         border-radius: 12px;
         box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
         text-align: center;
@@ -148,10 +148,16 @@
       <div id="loading">Loading...</div>
       <p id="result"></p>
       <div class="response-buttons" id="responseButtons" style="display: none">
-        <button class="confirm-btn" onclick="submitResponse('confirm')">
+        <button
+          id="confirmButton"
+          class="confirm-btn"
+          onclick="submitResponse('confirm')"
+        >
           Confirm Availability
         </button>
+
         <button
+          id="notAvailableButton"
           class="not-available-btn"
           onclick="submitResponse('not_available')"
         >
