@@ -129,8 +129,8 @@
     <div class="container">
       <h1 class="form-heading">Passenger Check</h1>
       <h4 class="form-desc">
-        Enter your first name and check if your name is included in
-        the Passenger List
+        Enter your first name and check if your name is included in the
+        Passenger List
       </h4>
       <input type="text" id="nameInput" placeholder="Enter your name" />
       <button onclick="checkName()">Check Name</button>
@@ -163,11 +163,19 @@
         fetch(`${url}?name=${encodedName}`)
           .then((response) => response.text())
           .then((data) => {
-            document.getElementById("result").innerText = data;
-            if (data.includes("Click to confirm")) {
-              document.getElementById("confirmButton").style.display = "block";
+            // Check if the name exists in the list and display the result
+            if (data.includes("Name not found")) {
+              // Modify the "name not found" message here
+              document.getElementById("result").innerText =
+                "Oops! We couldn't find your name in the list. Please check again!";
             } else {
-              document.getElementById("confirmButton").style.display = "none";
+              document.getElementById("result").innerText = data;
+              if (data.includes("Click to confirm")) {
+                document.getElementById("confirmButton").style.display =
+                  "block";
+              } else {
+                document.getElementById("confirmButton").style.display = "none";
+              }
             }
 
             // Hide the loading message
