@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -24,6 +25,8 @@
         justify-content: center;
         align-items: center;
       }
+
+      /* Main Container */
       .container {
         text-align: center;
         width: 100%;
@@ -33,18 +36,22 @@
         border-radius: 15px;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
       }
+
       .form-heading {
         font-size: 36px;
         font-weight: 600;
         color: #333;
         margin-bottom: 15px;
       }
+
       .form-desc {
         font-size: 16px;
         font-weight: 400;
         color: #777;
         margin-bottom: 20px;
       }
+
+      /* Input Field */
       input {
         width: 100%;
         padding: 14px;
@@ -56,11 +63,14 @@
         color: #333;
         transition: 0.3s ease;
       }
+
       input:focus {
         background-color: #fff;
         border: 2px solid #ff7e5f;
         outline: none;
       }
+
+      /* Check Now Button */
       button {
         width: 100%;
         padding: 14px;
@@ -74,9 +84,12 @@
         transition: 0.3s ease;
         margin: 15px 0;
       }
+
       button:hover {
         background-color: #feb47b;
       }
+
+      /* Loading message */
       #loading {
         display: none;
         font-size: 18px;
@@ -84,55 +97,31 @@
         color: #ff7e5f;
         margin-top: 15px;
       }
+
+      /* Result Message */
       #result {
         font-size: 18px;
         color: #333;
         font-weight: 500;
         margin-top: 20px;
       }
-      .response-buttons {
-        display: flex;
-        gap: 10px;
-        justify-content: center;
-        margin-top: 20px;
-      }
-      .confirm-btn,
-      .not-available-btn {
-        flex: 1;
-        padding: 12px 10px;
+
+      /* Confirm Button */
+      #confirmButton {
+        display: none;
+        padding: 12px 20px;
+        background-color: #28a745;
         border: none;
         border-radius: 10px;
+        color: white;
         font-size: 16px;
         cursor: pointer;
         transition: 0.3s ease;
+        margin-top: 20px;
       }
-      .confirm-btn {
-        background-color: #28a745;
-        color: white;
-      }
-      .confirm-btn:hover {
+
+      #confirmButton:hover {
         background-color: #218838;
-      }
-      .not-available-btn {
-        background-color: #dc3545;
-        color: white;
-      }
-      .not-available-btn:hover {
-        background-color: #c82333;
-      }
-      #popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgb(213, 255, 254);
-        padding: 30px 40px;
-        border-radius: 12px;
-        box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        font-size: 18px;
-        font-weight: 500;
       }
     </style>
   </head>
@@ -145,69 +134,70 @@
       </h4>
       <input type="text" id="nameInput" placeholder="Enter your name" />
       <button onclick="checkName()">Check Name</button>
-      <div id="loading">Loading...</div>
-      <p id="result"></p>
-      <div class="response-buttons" id="responseButtons" style="display: none">
-        <button
-          id="confirmButton"
-          class="confirm-btn"
-          onclick="submitResponse('confirm')"
-        >
-          Confirm Availability
-        </button>
 
-        <button
-          id="notAvailableButton"
-          class="not-available-btn"
-          onclick="submitResponse('not_available')"
-        >
-          Not Available
-        </button>
-      </div>
+      <!-- Loading indicator -->
+      <div id="loading">Loading...</div>
+
+      <p id="result"></p>
+
+      <button id="confirmButton" onclick="confirmAvailability()">
+        Confirm Availability
+      </button>
     </div>
 
-    <!-- Popup -->
-    <div id="popup">Thank you! Your response is recorded. ✅</div>
-
     <script>
-      const url =
-        "https://script.google.com/macros/s/AKfycby1eWbhbYFF-NrMkGr1c99eQHl5LXry9PG7AzXPC6oRc9JH4OO95MinxshxLmvatvcNVQ/exec";
+                  const url =
+                    "https://script.google.com/macros/s/AKfycby1eWbhbYFF-NrMkGr1c99eQHl5LXry9PG7AzXPC6oRc9JH4OO95MinxshxLmvatvcNVQ/exec";
 
-      function checkName() {
-        const name = document.getElementById("nameInput").value.trim();
-        const encodedName = encodeURIComponent(name);
-        document.getElementById("result").innerText = "";
-        document.getElementById("responseButtons").style.display = "none";
-        document.getElementById("loading").style.display = "block";
+                  function checkName() {
+                    const name = document.getElementById("nameInput").value.trim();
+                    const encodedName = encodeURIComponent(name); // Encoding the name
 
-        fetch(`${url}?name=${encodedName}`)
-          .then((response) => response.text())
-          .then((data) => {
-            if (data.includes("Name not found")) {
-              document.getElementById("result").innerText =
-                "Oops! We couldn't find your name in the list.";
-            } else {
-              document.getElementById("result").innerText = data;
-              if (data.includes("Click to confirm")) {
-                document.getElementById("responseButtons").style.display =
-                  "flex";
-              }
-            }
-            document.getElementById("loading").style.display = "none";
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            document.getElementById("loading").style.display = "none";
-          });
-      }
+                    // Clear result and hide confirm button before starting
+                    document.getElementById("result").innerText = "";
+                    document.getElementById("confirmButton").style.display = "none";
 
-      function submitResponse(type) {
+                    // Show the loading message
+                    document.getElementById("loading").style.display = "block";
+
+                    fetch($,{url}?name=$:{encodedName})
+                      .then((response) => response.text())
+                      .then((data) => {
+                        // Check if the name exists in the list and display the result
+                        if (data.includes("Name not found")) {
+                          // Modify the "name not found" message here
+                          document.getElementById("result").innerText =
+                            "Oops! We couldn't find your name in the list. Please check again!";
+                        } else {
+                          document.getElementById("result").innerText = data;
+                          if (data.includes("Click to confirm")) {
+                            document.getElementById("confirmButton").style.display =
+                              "block";
+                          } else {
+                            document.getElementById("confirmButton").style.display = "none";
+                          }
+                        }
+
+                        // Hide the loading message
+                        document.getElementById("loading").style.display = "none";
+                      })
+                      .catch((error) => {
+                        console.error("Error:", error);
+                        document.getElementById("loading").style.display = "none"; // Hide on error
+                      });
+                  }
+
+        function confirmAvailability() {
         const name = document.getElementById("nameInput").value.trim();
         const encodedName = encodeURIComponent(name);
         const params = new URLSearchParams();
         params.append("name", encodedName);
-        params.append("response", type); // Send either "confirm" or "not_available"
 
+        // Immediately hide the confirm button and clear the result text
+        document.getElementById("confirmButton").style.display = "none";
+        document.getElementById("result").innerText = ""; // 🛑 Clear the text message too
+
+        // Show the loading message
         document.getElementById("loading").style.display = "block";
 
         fetch(url, {
@@ -216,23 +206,13 @@
         })
           .then((response) => response.text())
           .then((data) => {
-            document.getElementById("loading").style.display = "none";
-            document.getElementById("responseButtons").style.display = "none";
-            document.getElementById("result").innerText = "";
-            showPopup();
+            alert("Request received! ✅");
+            document.getElementById("loading").style.display = "none"; // Hide loading
           })
           .catch((error) => {
             console.error("Error:", error);
-            document.getElementById("loading").style.display = "none";
+            document.getElementById("loading").style.display = "none"; // Hide loading even if error
           });
-      }
-
-      function showPopup() {
-        const popup = document.getElementById("popup");
-        popup.style.display = "block";
-        setTimeout(() => {
-          popup.style.display = "none";
-        }, 3000); // Hide after 3 seconds
       }
     </script>
   </body>
