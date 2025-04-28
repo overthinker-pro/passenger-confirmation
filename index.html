@@ -13,6 +13,7 @@
     <title>Bethany Tour 2025</title>
     <style>
       body {
+        background: linear-gradient(145deg, #ffd2d2 40%, #bdbdff 60%);
         font-family: "Ubuntu", sans-serif;
       }
       /* main div */
@@ -27,27 +28,42 @@
       }
 
       /* Form contents */
+      .form-contents {
+        padding: 10px;
+        max-width: 500px;
+        border-radius: 15px;
+        box-shadow: 3px 3px 16px rgb(168, 166, 166);
+        background-color: #e0e0e0;
+      }
 
-    .form-heading {
+      .form-heading {
         font-size: 35px;
         font-weight: 500;
-    }
+      }
+
+      .form-desc {
+        font-weight: 400;
+        margin: 10px 30px;
+      }
 
       input {
         padding: 10px;
         width: 80%;
         margin: 10px 0;
-        border: none;
-        box-shadow: 2px 3px 14px grey;
-        border-radius: 15px;
+        border: 1px solid #b9b9b9;
+        border-radius: 10px;
       }
+
+      /* Check Now Button */
       button {
         padding: 10px 20px;
         background-color: #4caf50;
+        border-radius: 10px;
         color: white;
         border: none;
         cursor: pointer;
         margin: 20px 0;
+        transition: all 0.3s ease-in-out;
       }
       button:hover {
         background-color: #45a049;
@@ -58,6 +74,10 @@
     <div class="container">
       <div class="form-contents">
         <h1 class="form-heading">Passenger Check</h1>
+        <h4 class="form-desc">
+          Enter your first name/full name and check if your name is included in
+          the Passenger List
+        </h4>
         <input type="text" id="name" placeholder="Enter your name" />
         <button onclick="checkName()">Check Name</button>
 
@@ -76,31 +96,55 @@
       const url =
         "https://script.google.com/macros/s/AKfycby1eWbhbYFF-NrMkGr1c99eQHl5LXry9PG7AzXPC6oRc9JH4OO95MinxshxLmvatvcNVQ/exec"; // Replace with the URL from Google Apps Script
 
-      function checkName() {
-        const name = document.getElementById("name").value;
-        fetch(`${url}?name=${name}`)
-          .then((response) => response.text())
-          .then((result) => {
-            document.getElementById("result").textContent = result;
-            if (result === "You are not confirmed yet. Click to confirm.") {
-              document.getElementById("confirmButton").style.display = "inline";
-            } else {
-              document.getElementById("confirmButton").style.display = "none";
-            }
-          });
+      function doGet(e) {
+        var sheet =
+          SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
+            "Passenger List"
+          );
+        var data = sheet.getDataRange().getValues();
+        var name = e.parameter.name.trim().toLowerCase();
+
+        // Search for the first name in the list
+        var result = "Name not found.";
+        for (var i = 1; i < data.length; i++) {
+          var fullName = data[i][0].toLowerCase();
+          var firstName = fullName.split(" ")[0]; // Get the first name
+          if (firstName === name) {
+            result =
+              data[i][1] === "Confirmed"
+                ? "You are confirmed for the tour."
+                : "You are not confirmed yet. Click to confirm.";
+            break;
+          }
+        }
+
+        // Return the result
+        return ContentService.createTextOutput(result).setMimeType(
+          ContentService.MimeType.TEXT
+        );
       }
 
-      function confirmAvailability() {
-        const name = document.getElementById("name").value;
-        const confirmUrl = `${url}?name=${name}`;
+      function doPost(e) {
+        var sheet =
+          SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
+            "Passenger List"
+          );
+        var name = e.parameter.name.trim().toLowerCase();
 
-        fetch(confirmUrl, { method: "POST" })
-          .then((response) => response.text())
-          .then((result) => {
-            document.getElementById("result").textContent =
-              "Confirmation received!";
-            document.getElementById("confirmButton").style.display = "none";
-          });
+        // Find name and update status
+        var data = sheet.getDataRange().getValues();
+        for (var i = 1; i < data.length; i++) {
+          var fullName = data[i][0].toLowerCase();
+          var firstName = fullName.split(" ")[0]; // Get the first name
+          if (firstName === name) {
+            sheet.getRange(i + 1, 2).setValue("Confirmed");
+            break;
+          }
+        }
+
+        return ContentService.createTextOutput(
+          "Confirmation received!"
+        ).setMimeType(ContentService.MimeType.TEXT);
       }
     </script>
   </body>
