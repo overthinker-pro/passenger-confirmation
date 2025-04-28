@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Passenger Check</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    .container {
+      max-width: 400px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    input {
+      padding: 10px;
+      width: 80%;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Passenger Check</h1>
+    <input type="text" id="name" placeholder="Enter your name" />
+    <button onclick="checkName()">Check Name</button>
+
+    <p id="result"></p>
+    <button id="confirmButton" style="display:none;" onclick="confirmAvailability()">Confirm Availability</button>
+  </div>
+
+  <script>
+    const url = "https://script.google.com/macros/s/AKfycby1eWbhbYFF-NrMkGr1c99eQHl5LXry9PG7AzXPC6oRc9JH4OO95MinxshxLmvatvcNVQ/exec"; // Replace with the URL from Google Apps Script
+
+    function checkName() {
+      const name = document.getElementById('name').value;
+      fetch(`${url}?name=${name}`)
+        .then(response => response.text())
+        .then(result => {
+          document.getElementById('result').textContent = result;
+          if (result === "You are not confirmed yet. Click to confirm.") {
+            document.getElementById('confirmButton').style.display = 'inline';
+          } else {
+            document.getElementById('confirmButton').style.display = 'none';
+          }
+        });
+    }
+
+    function confirmAvailability() {
+      const name = document.getElementById('name').value;
+      const confirmUrl = `${url}?name=${name}`;
+
+      fetch(confirmUrl, { method: 'POST' })
+        .then(response => response.text())
+        .then(result => {
+          document.getElementById('result').textContent = "Confirmation received!";
+          document.getElementById('confirmButton').style.display = 'none';
+        });
+    }
+  </script>
+
+</body>
+</html>
