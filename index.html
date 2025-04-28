@@ -105,55 +105,36 @@
       const url =
         "https://script.google.com/macros/s/AKfycby1eWbhbYFF-NrMkGr1c99eQHl5LXry9PG7AzXPC6oRc9JH4OO95MinxshxLmvatvcNVQ/exec"; // Replace with the URL from Google Apps Script
 
-      function doGet(e) {
-        var sheet =
-          SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
-            "Passenger List"
-          );
-        var data = sheet.getDataRange().getValues();
-        var name = e.parameter.name.trim().toLowerCase();
-
-        // Search for the first name in the list
-        var result = "Name not found.";
-        for (var i = 1; i < data.length; i++) {
-          var fullName = data[i][0].toLowerCase();
-          var firstName = fullName.split(" ")[0]; // Get the first name
-          if (firstName === name) {
-            result =
-              data[i][1] === "Confirmed"
-                ? "You are confirmed for the tour."
-                : "You are not confirmed yet. Click to confirm.";
-            break;
-          }
-        }
-
-        // Return the result
-        return ContentService.createTextOutput(result).setMimeType(
-          ContentService.MimeType.TEXT
-        );
+      // Function to check if name exists
+      function checkName() {
+        const name = document.getElementById("nameInput").value.trim();
+        fetch(`${url}?name=${name}`)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById("result").innerText = data;
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       }
 
-      function doPost(e) {
-        var sheet =
-          SpreadsheetApp.getActiveSpreadsheet().getSheetByName(
-            "Passenger List"
-          );
-        var name = e.parameter.name.trim().toLowerCase();
+      // Function to confirm attendance
+      function confirmAvailability() {
+        const name = document.getElementById("nameInput").value.trim();
+        const params = new URLSearchParams();
+        params.append("name", name);
 
-        // Find name and update status
-        var data = sheet.getDataRange().getValues();
-        for (var i = 1; i < data.length; i++) {
-          var fullName = data[i][0].toLowerCase();
-          var firstName = fullName.split(" ")[0]; // Get the first name
-          if (firstName === name) {
-            sheet.getRange(i + 1, 2).setValue("Confirmed");
-            break;
-          }
-        }
-
-        return ContentService.createTextOutput(
-          "Confirmation received!"
-        ).setMimeType(ContentService.MimeType.TEXT);
+        fetch(url, {
+          method: "POST",
+          body: params,
+        })
+          .then((response) => response.text())
+          .then((data) => {
+            alert(data); // Confirmation message
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
       }
     </script>
   </body>
