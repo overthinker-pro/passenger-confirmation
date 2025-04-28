@@ -123,6 +123,64 @@
       #confirmButton:hover {
         background-color: #218838;
       }
+
+      /* Popup Styles */
+      #popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 999;
+      }
+
+      #popup-content {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        animation: popupFade 0.3s ease-in-out;
+      }
+
+      #popup-content h2 {
+        margin-bottom: 10px;
+        color: #28a745;
+      }
+
+      #popup-content p {
+        margin-bottom: 20px;
+        color: #555;
+      }
+
+      #popup-content button {
+        padding: 10px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      #popup-content button:hover {
+        background-color: #218838;
+      }
+
+      @keyframes popupFade {
+        from {
+          transform: scale(0.8);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
     </style>
   </head>
   <body>
@@ -143,6 +201,15 @@
       <button id="confirmButton" onclick="confirmAvailability()">
         Confirm Availability
       </button>
+    </div>
+
+    <!-- Popup -->
+    <div id="popup" style="display: none">
+      <div id="popup-content">
+        <h2>✅ Request Received!</h2>
+        <p>Thank you! Your confirmation has been recorded.</p>
+        <button onclick="closePopup()">OK</button>
+      </div>
     </div>
 
     <script>
@@ -189,9 +256,13 @@
 
       function confirmAvailability() {
         const name = document.getElementById("nameInput").value.trim();
-        const encodedName = encodeURIComponent(name); // Encoding the name
+        const encodedName = encodeURIComponent(name);
         const params = new URLSearchParams();
         params.append("name", encodedName);
+
+        // Immediately hide the confirm button and clear the result text
+        document.getElementById("confirmButton").style.display = "none";
+        document.getElementById("result").innerText = "";
 
         // Show the loading message
         document.getElementById("loading").style.display = "block";
@@ -202,13 +273,23 @@
         })
           .then((response) => response.text())
           .then((data) => {
-            alert(data);
-            document.getElementById("loading").style.display = "none"; // Hide the loading message
+            document.getElementById("loading").style.display = "none"; // Hide loading
+            openPopup(); // 👉 Show the custom popup
           })
           .catch((error) => {
             console.error("Error:", error);
-            document.getElementById("loading").style.display = "none"; // Hide on error
+            document.getElementById("loading").style.display = "none";
           });
+      }
+
+      // Function to open the popup
+      function openPopup() {
+        document.getElementById("popup").style.display = "flex";
+      }
+
+      // Function to close the popup
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
       }
     </script>
   </body>
