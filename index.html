@@ -77,6 +77,14 @@
       button:hover {
         background-color: #feb47b;
       }
+
+      /* Loading message */
+      #loading {
+        display: none;
+        margin-top: 20px;
+        font-size: 18px;
+        color: #ff7e5f;
+      }
     </style>
   </head>
   <body>
@@ -87,8 +95,11 @@
           Enter your first name/full name and check if your name is included in
           the Passenger List
         </h4>
-        <input type="text" id="name" placeholder="Enter your name" />
+        <input type="text" id="nameInput" placeholder="Enter your name" />
         <button onclick="checkName()">Check Name</button>
+
+        <!-- Loading indicator -->
+        <div id="loading">Loading...</div>
 
         <p id="result"></p>
         <button
@@ -108,21 +119,44 @@
       // Function to check if name exists
       function checkName() {
         const name = document.getElementById("nameInput").value.trim();
-        fetch(`${url}?name=${name}`)
+        const encodedName = encodeURIComponent(name); // Encoding the name
+
+        // Clear the result and hide the confirm button before starting
+        document.getElementById("result").innerText = "";
+        document.getElementById("confirmButton").style.display = "none";
+
+        // Show the loading message
+        document.getElementById("loading").style.display = "block";
+
+        fetch(`${url}?name=${encodedName}`)
           .then((response) => response.text())
           .then((data) => {
             document.getElementById("result").innerText = data;
+            if (data.includes("Click to confirm")) {
+              document.getElementById("confirmButton").style.display =
+                "inline-block";
+            } else {
+              document.getElementById("confirmButton").style.display = "none";
+            }
+
+            // Hide the loading message when done
+            document.getElementById("loading").style.display = "none";
           })
           .catch((error) => {
             console.error("Error:", error);
+            document.getElementById("loading").style.display = "none"; // Hide on error
           });
       }
 
       // Function to confirm attendance
       function confirmAvailability() {
         const name = document.getElementById("nameInput").value.trim();
+        const encodedName = encodeURIComponent(name); // Encoding the name
         const params = new URLSearchParams();
-        params.append("name", name);
+        params.append("name", encodedName);
+
+        // Show the loading message
+        document.getElementById("loading").style.display = "block";
 
         fetch(url, {
           method: "POST",
@@ -130,10 +164,12 @@
         })
           .then((response) => response.text())
           .then((data) => {
-            alert(data); // Confirmation message
+            alert(data);
+            document.getElementById("loading").style.display = "none"; // Hide the loading message
           })
           .catch((error) => {
             console.error("Error:", error);
+            document.getElementById("loading").style.display = "none"; // Hide on error
           });
       }
     </script>
