@@ -22,6 +22,7 @@
         font-family: "Poppins", sans-serif;
         height: 100vh;
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
       }
@@ -188,7 +189,7 @@
         }
 
         #popup {
-            width: 100%;
+          width: 100%;
         }
       }
 
@@ -196,6 +197,24 @@
         font-size: 13px;
         margin-top: 20px;
         color: #555;
+      }
+
+      #tourRoutesButton {
+        width: 350px;
+        padding: 15px;
+        background-color: #6c63ff;
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 18px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: 0.3s ease;
+        margin-top: 50px;
+      }
+
+      #tourRoutesButton:hover {
+        background-color: #574b90;
       }
     </style>
   </head>
@@ -228,6 +247,10 @@
       </div>
       <p class="copyright">&copy; NVA All Rights Reserved</p>
     </div>
+
+    <button id="tourRoutesButton" onclick="location.href='timeline.html'">
+      Tour Routes
+    </button>
 
     <script>
       const url =
