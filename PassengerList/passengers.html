@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Passenger List</title>
+    <link rel="stylesheet" href="passengers.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>🚌 Passenger List - Bethany Tour 2025</h1>
+      <p>Below is the list of all confirmed passengers.</p>
+    </header>
+
+    <main>
+      <section class="list-container">
+        <ul id="passengerList"></ul>
+      </section>
+
+      <button class="back-button" onclick="history.back()">← Go Back</button>
+    </main>
+
+    <script>
+      const passengerList = [
+        "Aaden Joe Ajin",
+        "Abel Mathews Alex",
+        "Ajintha Elsa Abraham",
+        "Andria Ann Abraham",
+        "Angel Mary Abraham",
+        "Anjali Elizabeth Jacob",
+        "Aswathy Susan",
+        "Babitha Joby",
+        "Fr. Bibin Mathew",
+        "Dan Jacob Renjith",
+        "Jewel Mary Varghese",
+        "Johan V Jacob",
+        "Minju Merly",
+        "Neha Achu Jacob",
+        "Nevil Thomas Abraham",
+        "Noel V Abraham",
+        "Preethi Anne Alex",
+        "Riba K John",
+      ];
+
+      const listElement = document.getElementById("passengerList");
+
+      passengerList.forEach((name) => {
+        const li = document.createElement("li");
+        li.textContent = name;
+        listElement.appendChild(li);
+      });
+    </script>
+  </body>
+</html>
