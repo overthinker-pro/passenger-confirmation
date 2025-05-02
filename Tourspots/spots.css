@@ -113,6 +113,25 @@ header p {
   border-radius: 8px;
 }
 
+
+.back-button {
+  display: block;
+  margin: 30px auto;
+  padding: 12px 24px;
+  background-color: #ff5722;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.back-button:hover {
+  background-color: #e64a19;
+}
+
 @keyframes fadeInUp {
   to {
     opacity: 1;
