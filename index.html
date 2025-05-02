@@ -207,7 +207,7 @@
         border-radius: 12px;
         color: white;
         font-size: 18px;
-        font-weight: 500;
+        font-weight: 600;
         cursor: pointer;
         transition: 0.3s ease;
         margin-top: 50px;
@@ -215,6 +215,26 @@
 
       #tourRoutesButton:hover {
         background-color: #574b90;
+      }
+
+      #passengerListButton {
+        width: 250px;
+        padding: 15px;
+        background-color: #605ae3; 
+        border: none;
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        margin-top: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+
+      #passengerListButton:hover {
+        background-color: #4540a4; 
+        transform: translateY(-2px);
       }
     </style>
   </head>
@@ -248,8 +268,18 @@
       <p class="copyright">&copy; NVA All Rights Reserved</p>
     </div>
 
-    <button id="tourRoutesButton" onclick="location.href='Tourspots/spots.html'">
+    <button
+      id="tourRoutesButton"
+      onclick="location.href='Tourspots/spots.html'"
+    >
       Tour Routes
+    </button>
+
+    <button
+      id="passengerListButton"
+      onclick="location.href='passenger-list.html'"
+    >
+      View Passenger List
     </button>
 
     <script>
