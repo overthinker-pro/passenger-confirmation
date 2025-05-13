@@ -95,6 +95,11 @@ header p {
   color: #555;
 }
 
+#nb {
+  font-size: 13px;
+  color: #4f4f4f;
+}
+
 .food-stop .timeline-content {
   background: linear-gradient(135deg, #fffde4, #f9d29d);
   padding: 15px;
