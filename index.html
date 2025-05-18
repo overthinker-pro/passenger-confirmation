@@ -20,347 +20,192 @@
       body {
         background: linear-gradient(120deg, #ff7e5f, #feb47b);
         font-family: "Poppins", sans-serif;
-        height: auto;
+        min-height: 100vh;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        padding: 30px 15px;
       }
 
       /* Main Container */
       .container {
-        text-align: center;
+        text-align: left;
         width: 100%;
-        max-width: 450px;
+        max-width: 600px;
         background-color: white;
-        padding: 30px 40px;
-        border-radius: 15px;
-        margin: 40px 0 0 0;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        padding: 40px 50px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
       }
 
-      .form-heading {
-        font-size: 36px;
-        font-weight: 600;
+      h1 {
+        font-size: 38px;
+        font-weight: 700;
         color: #333;
+        margin-bottom: 10px;
+        text-align: center;
+      }
+
+      h2 {
+        font-size: 28px;
+        font-weight: 600;
+        color: #ff7e5f;
+        text-align: center;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      h3 {
+        color: #ff7e5f;
+        font-weight: 600;
+        font-size: 22px;
+        margin-top: 30px;
         margin-bottom: 15px;
       }
 
-      .form-desc {
-        font-size: 16px;
-        font-weight: 400;
-        color: #777;
-        margin-bottom: 20px;
+      ul.instructions {
+        list-style: disc inside;
+        font-size: 17px;
+        line-height: 1.6;
+        color: #444;
+        padding-left: 10px;
       }
 
-      /* Input Field */
-      input {
-        width: 100%;
-        padding: 14px;
-        margin: 10px 0;
-        border: none;
-        border-radius: 12px;
-        background-color: #fafafa;
-        font-size: 16px;
-        color: #333;
-        transition: 0.3s ease;
+      ul.instructions li {
+        margin-bottom: 12px;
       }
 
-      input:focus {
-        background-color: #fff;
-        border: 2px solid #ff7e5f;
-        outline: none;
-      }
-
-      /* Check Now Button */
-      button {
-        width: 100%;
-        padding: 14px;
-        background-color: #ff7e5f;
-        border: none;
-        border-radius: 12px;
-        color: white;
-        font-size: 18px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: 0.3s ease;
-        margin: 15px 0;
-      }
-
-      button:hover {
-        background-color: #feb47b;
-      }
-
-      /* Loading message */
-      #loading {
-        display: none;
-        font-size: 18px;
-        font-weight: 500;
-        color: #ff7e5f;
-        margin-top: 15px;
-      }
-
-      /* Result Message */
-      #result {
-        font-size: 18px;
-        color: #333;
-        font-weight: 500;
-        margin-top: 20px;
-      }
-
-      /* Confirm Button */
-      #confirmButton {
-        display: none;
-        padding: 12px 20px;
-        background-color: #28a745;
-        border: none;
-        border-radius: 10px;
-        color: white;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s ease;
-        margin-top: 20px;
-      }
-
-      #confirmButton:hover {
-        background-color: #218838;
-      }
-
-      /* Popup Styles */
-      #popup {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.6);
+      /* Buttons container */
+      .buttons {
         display: flex;
         justify-content: center;
-        align-items: center;
-        z-index: 999;
-      }
-
-      #popup-content {
-        background: white;
-        padding: 30px 40px;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        animation: popupFade 0.3s ease-in-out;
-      }
-
-      #popup-content h2 {
-        margin-bottom: 10px;
-        color: #28a745;
-      }
-
-      #popup-content p {
-        margin-bottom: 20px;
-        color: #555;
-      }
-
-      #popup-content button {
-        padding: 10px 20px;
-        background-color: #28a745;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        cursor: pointer;
-      }
-
-      #popup-content button:hover {
-        background-color: #218838;
-      }
-
-      @keyframes popupFade {
-        from {
-          transform: scale(0.8);
-          opacity: 0;
-        }
-        to {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      @media (max-width: 500px) {
-        .container {
-          width: 90%;
-        }
-
-        #popup {
-          width: 100%;
-        }
-      }
-
-      .copyright {
-        font-size: 13px;
-        margin-top: 20px;
-        color: #555;
-      }
-
-      #tourRoutesButton {
-        width: 250px;
-        padding: 15px;
-        background-color: #6c63ff;
-        border: none;
-        border-radius: 12px;
-        color: white;
-        font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: 0.3s ease;
+        gap: 25px;
         margin-top: 50px;
+        flex-wrap: wrap;
       }
 
-      #tourRoutesButton:hover {
-        background-color: #574b90;
-      }
-
-      #passengerListButton {
-        width: 250px;
-        padding: 15px;
-        background-color: #605ae3; 
+      button {
+        min-width: 230px;
+        padding: 16px 25px;
         border: none;
-        border-radius: 12px;
-        color: #ffffff;
+        border-radius: 14px;
         font-size: 18px;
         font-weight: 600;
         cursor: pointer;
         transition: background-color 0.3s ease, transform 0.2s ease;
-        margin-top: 20px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+        color: white;
+      }
+
+      #tourRoutesButton {
+        background-color: #6c63ff;
+      }
+
+      #tourRoutesButton:hover {
+        background-color: #574b90;
+        transform: translateY(-3px);
+      }
+
+      #passengerListButton {
+        background-color: #605ae3;
       }
 
       #passengerListButton:hover {
-        background-color: #4540a4; 
-        transform: translateY(-2px);
+        background-color: #4540a4;
+        transform: translateY(-3px);
+      }
+
+      /* Responsive */
+      @media (max-width: 650px) {
+        .container {
+          padding: 30px 25px;
+        }
+
+        button {
+          min-width: 100%;
+          font-size: 16px;
+          padding: 14px 0;
+        }
+
+        .buttons {
+          flex-direction: column;
+          gap: 20px;
+          margin-top: 35px;
+        }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1 class="form-heading">Passenger Check</h1>
-      <h4 class="form-desc">
-        Enter your first name and check if your name is included in the
-        Passenger List
-      </h4>
-      <input type="text" id="nameInput" placeholder="Enter your name" />
-      <button onclick="checkName()">Check Name</button>
+      <h1>Bethany Tour 2025</h1>
+      <h2>Tour Instructions</h2>
 
-      <!-- Loading indicator -->
-      <div id="loading">Loading...</div>
+      <h3>For All Participants</h3>
+      <ul class="instructions">
+        <li>Carry enough water to stay hydrated throughout the day.</li>
+        <li>Bring an umbrella for sudden rain and a cap if you have one.</li>
+        <li>
+          Wear comfortable, light clothing suitable for walking and a full day
+          of travel. Avoid heavy or bulky clothes. Bring extra clothes only if
+          necessary and keep luggage minimal.
+        </li>
+        <li>
+          Take only essential items to keep your luggage light and create more
+          space for everyone.
+        </li>
+        <li>
+          The group will split into up to 3 smaller clusters in crowded places
+          to stay safe and organized.
+        </li>
+        <li>
+          Everyone must be at Bethany Church on 21st May (Tour Day) by 5:00 AM.
+        </li>
+      </ul>
 
-      <p id="result"></p>
+      <h3>For Students</h3>
+      <ul class="instructions">
+        <li>Always listen carefully to the adults in your group. Do not go anywhere alone.</li>
+        <li>
+          Running and playing are not allowed in crowded or busy areas. You
+          will have time to enjoy and play in safe, designated spots.
+        </li>
+        <li>Stay close to your group and be very careful everywhere you go.</li>
+        <li>Keep your valuables safe.</li>
+      </ul>
 
-      <button id="confirmButton" onclick="confirmAvailability()">
-        Confirm Availability
-      </button>
+      <h3>For Adults</h3>
+      <ul class="instructions">
+        <li>
+          Keep a close count of your group members at all times, especially when
+          leaving a place.
+        </li>
+        <li>
+          Take good care of your assigned students and make sure they stay with
+          the group.
+        </li>
+        <li>
+          Help students follow the rules kindly and remind them to stay safe.
+        </li>
+        <li>
+          Ensure students carry necessary medications and motion sickness tablets
+          if needed.
+        </li>
+      </ul>
 
-      <!-- Popup -->
-      <div id="popup" style="display: none">
-        <div id="popup-content">
-          <h2>✅ Request Received!</h2>
-          <p>Thank you! Your confirmation has been recorded.</p>
-          <button onclick="closePopup()">OK</button>
-        </div>
+      <div class="buttons">
+        <button id="tourRoutesButton" onclick="location.href='Tourspots/spots.html'">
+          Tour Routes
+        </button>
+
+        <button
+          id="passengerListButton"
+          onclick="location.href='PassengerList/passengers.html'"
+        >
+          View Passenger List
+        </button>
       </div>
-      <p class="copyright">&copy; NVA All Rights Reserved</p>
     </div>
-
-    <button
-      id="tourRoutesButton"
-      onclick="location.href='Tourspots/spots.html'"
-    >
-      Tour Routes
-    </button>
-
-    <button
-      id="passengerListButton"
-      onclick="location.href='PassengerList/passengers.html'"
-    >
-      View Passenger List
-    </button>
-
-    <script>
-      const url =
-        "https://script.google.com/macros/s/AKfycbzwAcOcULD9IkKjMeKJxRRdImNmoAmtfJJHPRR6dJjg4LwX2naGH7OOyS96k3olpmMP9w/exec";
-
-      function checkName() {
-        const name = document.getElementById("nameInput").value.trim();
-        const encodedName = encodeURIComponent(name); // Encoding the name
-
-        // Clear result and hide confirm button before starting
-        document.getElementById("result").innerText = "";
-        document.getElementById("confirmButton").style.display = "none";
-
-        // Show the loading message
-        document.getElementById("loading").style.display = "block";
-
-        fetch(url + "?name=" + encodedName) // Corrected fetch request
-          .then((response) => response.text())
-          .then((data) => {
-            // Check if the name exists in the list and display the result
-            if (data.includes("Name not found")) {
-              document.getElementById("result").innerText =
-                "Oops! We couldn't find your name in the list. Please check again!";
-            } else {
-              document.getElementById("result").innerText = data;
-              if (data.includes("Click to confirm")) {
-                document.getElementById("confirmButton").style.display =
-                  "block";
-              } else {
-                document.getElementById("confirmButton").style.display = "none";
-              }
-            }
-
-            // Hide the loading message
-            document.getElementById("loading").style.display = "none";
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            document.getElementById("loading").style.display = "none"; // Hide on error
-          });
-      }
-
-      function confirmAvailability() {
-        const name = document.getElementById("nameInput").value.trim();
-        const encodedName = encodeURIComponent(name);
-        const params = new URLSearchParams();
-        params.append("name", encodedName);
-
-        // Immediately hide the confirm button and clear the result text
-        document.getElementById("confirmButton").style.display = "none";
-        document.getElementById("result").innerText = "";
-
-        // Show the loading message
-        document.getElementById("loading").style.display = "block";
-
-        fetch(url, {
-          method: "POST",
-          body: params,
-        })
-          .then((response) => response.text())
-          .then((data) => {
-            document.getElementById("loading").style.display = "none"; // Hide loading
-            openPopup(); // 👉 Show the custom popup
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-            document.getElementById("loading").style.display = "none";
-          });
-      }
-
-      // Function to open the popup
-      function openPopup() {
-        document.getElementById("popup").style.display = "flex";
-      }
-
-      // Function to close the popup
-      function closePopup() {
-        document.getElementById("popup").style.display = "none";
-      }
-    </script>
   </body>
 </html>
