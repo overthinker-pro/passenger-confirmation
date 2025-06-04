@@ -7,188 +7,153 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Bethany Tour 2025 - Guestbook</title>
+    <title>Bethany Tour 2025 - Thank You</title>
     <style>
       * {
         padding: 0;
         margin: 0;
         box-sizing: border-box;
       }
+
       body {
-        background: linear-gradient(120deg, #ff7e5f, #feb47b);
         font-family: "Poppins", sans-serif;
         min-height: 100vh;
         display: flex;
-        flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 30px 15px;
+        background: linear-gradient(-45deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        padding: 20px;
       }
 
-      /* Main Container */
+      /* Gradient background animation */
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      /* Glassmorphism container */
       .container {
-        text-align: center;
+        max-width: 700px;
         width: 100%;
-        max-width: 600px;
-        background-color: white;
-        padding: 40px 50px;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+        padding: 40px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        animation: fadeIn 1.2s ease-in-out;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+      }
+
+      /* Fade-in animation */
+      @keyframes fadeIn {
+        0% {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       h1 {
-        font-size: 30px;
+        font-size: 40px;
         font-weight: 700;
-        color: #333;
-        margin-bottom: 10px;
+        color: #ffffff;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        margin-bottom: 15px;
       }
 
       p {
-        font-size: 17px;
-        color: #444;
-        line-height: 1.6;
-        margin-bottom: 30px;
-      }
-
-      /* Guestbook Form */
-      .guestbook-form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin-bottom: 30px;
-      }
-
-      input,
-      textarea {
-        padding: 12px;
-        font-size: 16px;
-        font-family: "Poppins", sans-serif;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        width: 100%;
-      }
-
-      textarea {
-        resize: vertical;
-        min-height: 100px;
-      }
-
-      button {
-        padding: 14px;
-        border: none;
-        border-radius: 14px;
         font-size: 18px;
-        font-weight: 600;
-        cursor: pointer;
-        background-color: #6c63ff;
+        color: #f0f0f0;
+        line-height: 1.7;
+        margin-bottom: 30px;
+        font-weight: 300;
+      }
+
+      /* Decorative icon with hover effect */
+      .icon {
+        font-size: 60px;
+        color: #ffffff;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease;
+      }
+
+      .icon:hover {
+        transform: scale(1.2) rotate(10deg);
+      }
+
+      /* Styled link as button */
+      .cta-button {
+        display: inline-block;
+        padding: 14px 30px;
+        background: #ff7e5f;
         color: white;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
-      }
-
-      button:hover {
-        background-color: #574b90;
-        transform: translateY(-3px);
-      }
-
-      /* Guestbook Entries */
-      .guestbook-entries {
-        margin-top: 30px;
-        text-align: left;
-      }
-
-      .entry {
-        background-color: #f9f9f9;
-        padding: 15px;
-        border-radius: 8px;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-      }
-
-      .entry h3 {
         font-size: 16px;
-        font-weight: 600;
-        color: #ff7e5f;
-        margin-bottom: 5px;
+        font-weight: 500;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        text-decoration: none;
       }
 
-      .entry p {
-        font-size: 15px;
-        color: #444;
-        margin-bottom: 10px;
+      .cta-button:hover {
+        background: #feb47b;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       }
 
-      .entry small {
-        font-size: 13px;
-        color: #777;
-      }
-
-      /* Responsive */
+      /* Responsive adjustments */
       @media (max-width: 650px) {
         .container {
-          padding: 30px 25px;
+          padding: 25px;
         }
 
-        button {
+        h1 {
+          font-size: 28px;
+        }
+
+        p {
           font-size: 16px;
-          padding: 12px;
+        }
+
+        .icon {
+          font-size: 45px;
+        }
+
+        .cta-button {
+          padding: 12px 25px;
+          font-size: 14px;
         }
       }
     </style>
   </head>
   <body>
     <div class="container">
-      <h1>Bethany Tour 2025</h1>
-      <p>Thank you for being part of our memorable journey! Share your thoughts and memories in our guestbook below.</p>
-
-      <div class="guestbook-form">
-        <input type="text" id="name" placeholder="Your Name" required />
-        <textarea id="message" placeholder="Your Message" required></textarea>
-        <button onclick="addGuestbookEntry()">Submit</button>
-      </div>
-
-      <div class="guestbook-entries" id="entries"></div>
+      <div class="icon">🎉</div>
+      <h1>Bethany Tour 2025 - A Memorable Journey!</h1>
+      <p>
+        Thank you for making Bethany Tour 2025 unforgettable! The journey has
+        concluded, but the memories will last forever. Stay tuned for more exciting
+        events from Bethany Church Sunday School.
+      </p>
+      <a href="https://bethany-tvla.netlify.app" class="cta-button">Explore Future Events</a>
     </div>
-
-    <script>
-      function addGuestbookEntry() {
-        const nameInput = document.getElementById("name");
-        const messageInput = document.getElementById("message");
-        const entriesDiv = document.getElementById("entries");
-
-        const name = nameInput.value.trim();
-        const message = messageInput.value.trim();
-
-        if (name === "" || message === "") {
-          alert("Please fill in both name and message.");
-          return;
-        }
-
-        const entryDiv = document.createElement("div");
-        entryDiv.className = "entry";
-
-        const entryName = document.createElement("h3");
-        entryName.textContent = name;
-
-        const entryMessage = document.createElement("p");
-        entryMessage.textContent = message;
-
-        const entryDate = document.createElement("small");
-        const now = new Date();
-        entryDate.textContent = `Posted on ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
-
-        entryDiv.appendChild(entryName);
-        entryDiv.appendChild(entryMessage);
-        entryDiv.appendChild(entryDate);
-
-        entriesDiv.prepend(entryDiv);
-
-        nameInput.value = "";
-        messageInput.value = "";
-      }
-    </script>
   </body>
 </html>
