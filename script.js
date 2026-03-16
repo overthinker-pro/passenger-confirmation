@@ -1,6 +1,10 @@
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
-const DEFAULT_CHOICE = "Hill Escape";
+const DEFAULT_CHOICE = "";
+const MAX_VOTES_PER_DEVICE = 5;
+const DEVICE_ID_STORAGE_KEY = "bethany_tour_device_id";
+const DEVICE_VOTE_COUNT_STORAGE_KEY = "bethany_tour_vote_count";
+const NO_SELECTION_LABEL = "No option selected";
 
 const optionCards = document.querySelectorAll(".option-card");
 const selectedChoice = document.getElementById("selected-choice");
@@ -10,6 +14,51 @@ const submitButton = voteForm.querySelector(".submit-button");
 const statusText = document.getElementById("form-status");
 const countdownTimer = document.getElementById("countdown-timer");
 const COUNTDOWN_TARGET = new Date(2026, 2, 25, 0, 0, 0);
+
+function generateDeviceId() {
+  if (window.crypto && typeof window.crypto.randomUUID === "function") {
+    return window.crypto.randomUUID();
+  }
+
+  return `device-${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function getDeviceId() {
+  const existingDeviceId = window.localStorage.getItem(DEVICE_ID_STORAGE_KEY);
+
+  if (existingDeviceId) {
+    return existingDeviceId;
+  }
+
+  const newDeviceId = generateDeviceId();
+  window.localStorage.setItem(DEVICE_ID_STORAGE_KEY, newDeviceId);
+  return newDeviceId;
+}
+
+function getStoredVoteCount() {
+  return Number(window.localStorage.getItem(DEVICE_VOTE_COUNT_STORAGE_KEY) || 0);
+}
+
+function setStoredVoteCount(count) {
+  window.localStorage.setItem(DEVICE_VOTE_COUNT_STORAGE_KEY, String(count));
+}
+
+function updateVoteAvailability() {
+  const remainingVotes = Math.max(0, MAX_VOTES_PER_DEVICE - getStoredVoteCount());
+
+  submitButton.disabled = remainingVotes <= 0;
+
+  if (remainingVotes <= 0) {
+    statusText.dataset.state = "error";
+    statusText.textContent = "This browser has reached the maximum of 5 votes.";
+    submitButton.textContent = "Vote Limit Reached";
+    return;
+  }
+
+  if (!submitButton.disabled || submitButton.textContent === "Vote Limit Reached") {
+    submitButton.textContent = "Submit Anonymous Vote";
+  }
+}
 
 function formatCountdown(totalMilliseconds) {
   const totalSeconds = Math.max(0, Math.floor(totalMilliseconds / 1000));
@@ -55,14 +104,14 @@ function startCountdown() {
 function setSelectedOption(choice) {
   optionCards.forEach((card) => {
     const input = card.querySelector('input[name="tourOption"]');
-    const isSelected = input.value === choice;
+    const isSelected = Boolean(choice) && input.value === choice;
 
     input.checked = isSelected;
     card.classList.toggle("selected", isSelected);
   });
 
-  selectedChoice.textContent = choice;
-  choiceInput.value = choice;
+  selectedChoice.textContent = choice || NO_SELECTION_LABEL;
+  choiceInput.value = choice || "";
 }
 
 optionCards.forEach((card) => {
@@ -72,6 +121,7 @@ optionCards.forEach((card) => {
 });
 
 startCountdown();
+updateVoteAvailability();
 
 voteForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -79,7 +129,13 @@ voteForm.addEventListener("submit", async (event) => {
   statusText.dataset.state = "";
   statusText.textContent = "";
 
+  if (getStoredVoteCount() >= MAX_VOTES_PER_DEVICE) {
+    updateVoteAvailability();
+    return;
+  }
+
   const payload = {
+    browserId: getDeviceId(),
     choice: choiceInput.value,
     note: voteForm.note.value.trim(),
     submittedAt: new Date().toISOString(),
@@ -120,6 +176,12 @@ voteForm.addEventListener("submit", async (event) => {
       throw new Error(result.error || "Submission was not saved");
     }
 
+    const updatedCount =
+      typeof result.deviceVoteCount === "number"
+        ? result.deviceVoteCount
+        : getStoredVoteCount() + 1;
+
+    setStoredVoteCount(updatedCount);
     voteForm.reset();
     setSelectedOption(DEFAULT_CHOICE);
     statusText.dataset.state = "success";
@@ -128,7 +190,6 @@ voteForm.addEventListener("submit", async (event) => {
     statusText.dataset.state = "error";
     statusText.textContent = error.message || "Unable to submit your vote right now.";
   } finally {
-    submitButton.disabled = false;
-    submitButton.textContent = "Submit Anonymous Vote";
+    updateVoteAvailability();
   }
 });

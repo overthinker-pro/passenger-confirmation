@@ -22,6 +22,9 @@
             <p class="hero-text">
               Vote your preference for the tour plan this year. The poll is anonymous and will be open until the March 25th. Final 
             </p>
+            <div class="hero-actions">
+              <a class="secondary-link" href="results.html">View Live Results</a>
+            </div>
           </div>
 
           <div class="hero-stats" aria-label="Poll highlights">
@@ -57,8 +60,8 @@
           </div>
 
           <div class="options-grid" role="radiogroup" aria-label="Tour choices">
-            <label class="option-card selected" data-theme="sunrise" data-choice="Hill Escape">
-              <input type="radio" name="tourOption" value="Hill Escape" checked />
+            <label class="option-card" data-theme="sunrise" data-choice="Hill Escape">
+              <input type="radio" name="tourOption" value="Hill Escape" />
               <div class="card-top">
                 <span class="option-tag">Option 01</span>
                 <span class="radio-dot" aria-hidden="true"></span>
@@ -122,12 +125,12 @@
               </div>
               <div class="choice-preview" aria-live="polite">
                 <span>Selected</span>
-                <span id="selected-choice">Hill Escape</span>
+                <span id="selected-choice">No option selected</span>
               </div>
             </div>
 
             <form id="vote-form">
-              <input id="choice-input" name="choice" type="hidden" value="Hill Escape" />
+              <input id="choice-input" name="choice" type="hidden" value="" />
 
               <div class="field full">
                 <label for="note">Add a note (optional)</label>
@@ -142,6 +145,8 @@
                 <p id="form-status" class="status" aria-live="polite"></p>
               </div>
             </form>
+
+            <a class="inline-link" href="results.html">See current poll analytics</a>
           </section>
         </section>
       </section>
