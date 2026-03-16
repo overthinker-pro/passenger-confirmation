@@ -13,6 +13,7 @@ const voteForm = document.getElementById("vote-form");
 const submitButton = voteForm.querySelector(".submit-button");
 const statusText = document.getElementById("form-status");
 const countdownTimer = document.getElementById("countdown-timer");
+const celebrationLayer = document.getElementById("celebration-layer");
 const COUNTDOWN_TARGET = new Date(2026, 2, 25, 0, 0, 0);
 
 function generateDeviceId() {
@@ -101,6 +102,31 @@ function startCountdown() {
   }, 1000);
 }
 
+function launchCelebration() {
+  if (!celebrationLayer) {
+    return;
+  }
+
+  const colors = ["#d76c3d", "#f7cf9f", "#b8ddcc", "#c4d5ff", "#ffd166", "#ef476f", "#06d6a0"];
+
+  for (let i = 0; i < 54; i += 1) {
+    const piece = document.createElement("span");
+    piece.className = "confetti-piece";
+    piece.style.left = `${Math.random() * 100}%`;
+    piece.style.background = colors[i % colors.length];
+    piece.style.width = `${0.45 + Math.random() * 0.5}rem`;
+    piece.style.height = `${0.7 + Math.random() * 0.9}rem`;
+    piece.style.animationDelay = `${Math.random() * 150}ms`;
+    piece.style.setProperty("--drift", `${(Math.random() - 0.5) * 18}rem`);
+    piece.style.setProperty("--spin", `${(Math.random() - 0.5) * 1080}deg`);
+    celebrationLayer.appendChild(piece);
+
+    window.setTimeout(() => {
+      piece.remove();
+    }, 1700);
+  }
+}
+
 function setSelectedOption(choice) {
   optionCards.forEach((card) => {
     const input = card.querySelector('input[name="tourOption"]');
@@ -184,6 +210,7 @@ voteForm.addEventListener("submit", async (event) => {
     setStoredVoteCount(updatedCount);
     voteForm.reset();
     setSelectedOption(DEFAULT_CHOICE);
+    launchCelebration();
     statusText.dataset.state = "success";
     statusText.textContent = "Your anonymous vote was submitted.";
   } catch (error) {

@@ -388,11 +388,30 @@ h2 {
 }
 
 .form-shell {
+  position: relative;
   margin-top: 1.5rem;
   padding: 1rem;
   border-radius: 1.5rem;
   background: var(--surface-strong);
   border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.celebration-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  top: -1.5rem;
+  width: 0.78rem;
+  height: 1.15rem;
+  border-radius: 0.25rem;
+  opacity: 0;
+  animation: confetti-fall 1450ms ease-out forwards;
 }
 
 .choice-preview {
@@ -782,5 +801,17 @@ textarea:focus {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(0.9);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--drift, 0), 18rem, 0) rotate(var(--spin, 360deg)) scale(1.05);
   }
 }
