@@ -3,157 +3,152 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Google Fonts -->
+    <title>Bethany Tour 2026 Poll</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Bethany Tour 2025 - Thank You</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Poppins", sans-serif;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: linear-gradient(-45deg, #ff7e5f, #feb47b, #86a8e7, #91eae4);
-        background-size: 400% 400%;
-        animation: gradientShift 15s ease infinite;
-        padding: 20px;
-      }
-
-      /* Gradient background animation */
-      @keyframes gradientShift {
-        0% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      /* Glassmorphism container */
-      .container {
-        max-width: 700px;
-        width: 100%;
-        background: rgba(255, 255, 255, 0.15);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-        text-align: center;
-        animation: fadeIn 1.2s ease-in-out;
-        border: 1px solid rgba(255, 255, 255, 0.3);
-      }
-
-      /* Fade-in animation */
-      @keyframes fadeIn {
-        0% {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        100% {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      h1 {
-        font-size: 40px;
-        font-weight: 700;
-        color: #ffffff;
-        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        margin-bottom: 15px;
-      }
-
-      p {
-        font-size: 18px;
-        color: #f0f0f0;
-        line-height: 1.7;
-        margin-bottom: 30px;
-        font-weight: 300;
-      }
-
-      /* Decorative icon with hover effect */
-      .icon {
-        font-size: 60px;
-        color: #ffffff;
-        margin-bottom: 20px;
-        transition: transform 0.3s ease;
-      }
-
-      .icon:hover {
-        transform: scale(1.2) rotate(10deg);
-      }
-
-      /* Styled link as button */
-      .cta-button {
-        display: inline-block;
-        padding: 14px 30px;
-        background: #ff7e5f;
-        color: white;
-        font-size: 16px;
-        font-weight: 500;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        text-decoration: none;
-      }
-
-      .cta-button:hover {
-        background: #feb47b;
-        transform: translateY(-3px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-      }
-
-      /* Responsive adjustments */
-      @media (max-width: 650px) {
-        .container {
-          padding: 25px;
-        }
-
-        h1 {
-          font-size: 28px;
-        }
-
-        p {
-          font-size: 16px;
-        }
-
-        .icon {
-          font-size: 45px;
-        }
-
-        .cta-button {
-          padding: 12px 25px;
-          font-size: 14px;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container">
-      <div class="icon">🎉</div>
-      <h1>Bethany Tour 2025 - A Memorable Journey!</h1>
-      <p>
-        Thank you for making Bethany Tour 2025 unforgettable! The journey has
-        concluded, but the memories will last forever. Stay tuned for more exciting
-        events from Bethany Church Sunday School.
-      </p>
-      <a href="https://bethany-tvla.netlify.app" class="cta-button">Explore Future Events</a>
-    </div>
+    <main class="page-shell">
+      <section class="hero">
+        <article class="hero-copy">
+          <div>
+            <p class="eyebrow">Bethany Tour 2026 / Anonymous Poll</p>
+            <h1>Vote freely. Your identity is not collected.</h1>
+            <p class="hero-text">
+              This poll only records which tour option you support and an optional
+              anonymous note. No name, number, or email is requested, so everyone can
+              respond without pressure.
+            </p>
+          </div>
+
+          <div class="hero-stats" aria-label="Poll highlights">
+            <div class="stat-pill">
+              <strong>3 Tour Plans</strong>
+              <span>Clear options with distinct moods</span>
+            </div>
+            <div class="stat-pill">
+              <strong>Anonymous</strong>
+              <span>No personal identity fields</span>
+            </div>
+            <div class="stat-pill">
+              <strong>Mobile First</strong>
+              <span>Designed to vote comfortably on phones</span>
+            </div>
+          </div>
+        </article>
+
+        <section class="vote-panel" aria-labelledby="poll-title">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Tour Selection</p>
+              <h2 id="poll-title">Pick the tour the group should take</h2>
+              <p class="panel-text">
+                Tap a card to select it. Your vote stays anonymous and only your
+                selected option with an optional note will be submitted.
+              </p>
+            </div>
+            <div class="live-badge" aria-live="polite">
+              <span class="live-badge-label">Voting closes in</span>
+              <strong id="countdown-timer">00:00:00</strong>
+            </div>
+          </div>
+
+          <div class="options-grid" role="radiogroup" aria-label="Tour choices">
+            <label class="option-card selected" data-theme="sunrise" data-choice="Hill Escape">
+              <input type="radio" name="tourOption" value="Hill Escape" checked />
+              <div class="card-top">
+                <span class="option-tag">Option 01</span>
+                <span class="radio-dot" aria-hidden="true"></span>
+              </div>
+              <h3>Hill Escape</h3>
+              <div class="trip-meta">
+                <span>1 Day</span>
+                <span>Nature</span>
+                <span>Moderate Budget</span>
+              </div>
+              <p>
+                A scenic route with viewpoints, fresh air, short group walks, and a
+                relaxed day built around mountain atmosphere.
+              </p>
+              <strong>Best for calm scenery with a little movement</strong>
+            </label>
+
+            <label class="option-card" data-theme="green" data-choice="Lakeside Retreat">
+              <input type="radio" name="tourOption" value="Lakeside Retreat" />
+              <div class="card-top">
+                <span class="option-tag">Option 02</span>
+                <span class="radio-dot" aria-hidden="true"></span>
+              </div>
+              <h3>Lakeside Retreat</h3>
+              <div class="trip-meta">
+                <span>1 Day</span>
+                <span>Fellowship</span>
+                <span>Budget Friendly</span>
+              </div>
+              <p>
+                A slower-paced outing focused on togetherness, food, conversation, and
+                plenty of space for every age group to enjoy the day.
+              </p>
+              <strong>Best for low-stress family style time</strong>
+            </label>
+
+            <label class="option-card" data-theme="sky" data-choice="City Discovery">
+              <input type="radio" name="tourOption" value="City Discovery" />
+              <div class="card-top">
+                <span class="option-tag">Option 03</span>
+                <span class="radio-dot" aria-hidden="true"></span>
+              </div>
+              <h3>City Discovery</h3>
+              <div class="trip-meta">
+                <span>1 Day</span>
+                <span>Landmarks</span>
+                <span>Flexible Plan</span>
+              </div>
+              <p>
+                A higher-energy day with city stops, food breaks, photo moments, and a
+                more active schedule for people who want variety.
+              </p>
+              <strong>Best for members who like a busier trip</strong>
+            </label>
+          </div>
+
+          <section class="form-shell">
+            <div class="form-head">
+              <div>
+                <p class="eyebrow">Submit Anonymous Vote</p>
+              </div>
+              <div class="choice-preview" aria-live="polite">
+                <span>Selected</span>
+                <span id="selected-choice">Hill Escape</span>
+              </div>
+            </div>
+
+            <form id="vote-form">
+              <input id="choice-input" name="choice" type="hidden" value="Hill Escape" />
+
+              <div class="field full">
+                <label for="note">Add a note (optional)</label>
+                <textarea
+                  id="note"
+                  name="note"
+                ></textarea>
+              </div>
+
+              <div class="actions">
+                <button class="submit-button" type="submit">Submit Anonymous Vote</button>
+                <p id="form-status" class="status" aria-live="polite"></p>
+              </div>
+            </form>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
   </body>
 </html>
