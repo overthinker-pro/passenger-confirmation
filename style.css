@@ -148,12 +148,40 @@ h2 {
 }
 
 .secondary-link {
+  position: relative;
+  isolation: isolate;
   min-height: 3rem;
   padding: 0.85rem 1.1rem;
   border-radius: 999px;
   color: var(--text);
   background: rgba(255, 255, 255, 0.78);
-  border: 1px solid rgba(31, 41, 55, 0.08);
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+.secondary-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(120deg, rgba(215, 108, 61, 0.95), rgba(92, 145, 255, 0.85), rgba(31, 122, 76, 0.9), rgba(215, 108, 61, 0.95));
+  background-size: 250% 250%;
+  animation: border-shift 4s linear infinite;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.secondary-link:hover,
+.secondary-link:focus-visible {
+  box-shadow: 0 14px 24px rgba(31, 41, 55, 0.1);
 }
 
 .inline-link {
@@ -688,10 +716,10 @@ textarea:focus {
   }
 
   .hero-copy {
-    min-height: calc(100vh - 6rem);
     position: sticky;
     top: 1.5rem;
-    align-content: space-between;
+    align-content: start;
+    height: fit-content;
   }
 
   .hero-text,
@@ -813,5 +841,15 @@ textarea:focus {
   100% {
     opacity: 0;
     transform: translate3d(var(--drift, 0), 18rem, 0) rotate(var(--spin, 360deg)) scale(1.05);
+  }
+}
+
+@keyframes border-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  100% {
+    background-position: 200% 50%;
   }
 }

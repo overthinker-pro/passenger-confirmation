@@ -16,6 +16,10 @@ const countdownTimer = document.getElementById("countdown-timer");
 const celebrationLayer = document.getElementById("celebration-layer");
 const COUNTDOWN_TARGET = new Date(2026, 2, 25, 0, 0, 0);
 
+function hasVotingClosed() {
+  return Date.now() >= COUNTDOWN_TARGET.getTime();
+}
+
 function generateDeviceId() {
   if (window.crypto && typeof window.crypto.randomUUID === "function") {
     return window.crypto.randomUUID();
@@ -45,6 +49,14 @@ function setStoredVoteCount(count) {
 }
 
 function updateVoteAvailability() {
+  if (hasVotingClosed()) {
+    submitButton.disabled = true;
+    submitButton.textContent = "Voting Closed";
+    statusText.dataset.state = "error";
+    statusText.textContent = "Voting has closed.";
+    return;
+  }
+
   const remainingVotes = Math.max(0, MAX_VOTES_PER_DEVICE - getStoredVoteCount());
 
   submitButton.disabled = remainingVotes <= 0;
@@ -84,6 +96,7 @@ function startCountdown() {
 
     if (timeRemaining <= 0) {
       countdownTimer.textContent = "00:00:00";
+      updateVoteAvailability();
       return false;
     }
 
@@ -154,6 +167,11 @@ voteForm.addEventListener("submit", async (event) => {
 
   statusText.dataset.state = "";
   statusText.textContent = "";
+
+  if (hasVotingClosed()) {
+    updateVoteAvailability();
+    return;
+  }
 
   if (getStoredVoteCount() >= MAX_VOTES_PER_DEVICE) {
     updateVoteAvailability();
