@@ -63,13 +63,13 @@ function updateVoteAvailability() {
 
   if (remainingVotes <= 0) {
     statusText.dataset.state = "error";
-    statusText.textContent = "This browser has reached the maximum of 5 votes.";
+    statusText.textContent = "This browser has reached the maximum votes.";
     submitButton.textContent = "Vote Limit Reached";
     return;
   }
 
   if (!submitButton.disabled || submitButton.textContent === "Vote Limit Reached") {
-    submitButton.textContent = "Submit Anonymous Vote";
+    submitButton.textContent = "Submit Vote";
   }
 }
 
@@ -230,7 +230,7 @@ voteForm.addEventListener("submit", async (event) => {
     setSelectedOption(DEFAULT_CHOICE);
     launchCelebration();
     statusText.dataset.state = "success";
-    statusText.textContent = "Your anonymous vote was submitted.";
+    statusText.textContent = "Your vote was submitted.";
   } catch (error) {
     statusText.dataset.state = "error";
     statusText.textContent = error.message || "Unable to submit your vote right now.";
