@@ -340,6 +340,29 @@ h2 {
   background: rgba(255, 255, 255, 0.55);
 }
 
+.route-flow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.route-flow span {
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.62);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.route-flow .route-arrow {
+  padding: 0;
+  background: transparent;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+}
+
 .option-card p {
   margin-top: 1rem;
   color: rgba(31, 41, 55, 0.86);
