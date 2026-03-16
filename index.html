@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -20,10 +20,14 @@
             <p class="eyebrow">Bethany Tour 2026</p>
             <h1>It's again the time of holidays!</h1>
             <p class="hero-text">
-              Vote your preference for the tour plan this year. The poll is anonymous and will be open until the March 25th. Live results can be viewed below.
+              Vote your preference for the tour plan this year. The poll is
+              anonymous and will be open until the March 25th. Live results can
+              be viewed below.
             </p>
             <div class="hero-actions">
-              <a class="secondary-link" href="results.html">View Live Results</a>
+              <a class="secondary-link" href="results.html"
+                >View Live Results</a
+              >
             </div>
           </div>
 
@@ -60,47 +64,75 @@
           </div>
 
           <div class="options-grid" role="radiogroup" aria-label="Tour choices">
-            <label class="option-card" data-theme="sunrise" data-choice="Hill Escape">
+            <label
+              class="option-card"
+              data-theme="sunrise"
+              data-choice="Hill Escape"
+            >
               <input type="radio" name="tourOption" value="Hill Escape" />
               <div class="card-top">
                 <span class="option-tag">Option 01</span>
                 <span class="radio-dot" aria-hidden="true"></span>
               </div>
-              <h3>Hill Escape</h3>
+              <h3>The Highlands Pilgrimage</h3>
               <div class="route-flow" aria-label="Hill Escape route">
-                <span>Botanical Garden</span>
-                <span class="route-arrow">-></span>
-                <span>Sunrise Point</span>
-                <span class="route-arrow">-></span>
-                <span>Hill View Park</span>
+                <span>Mar Baselios Dayara, Njaliakuzhy</span>
+                <span class="route-arrow" aria-hidden="true"></span>
+                <span>Pampady Dayara</span>
+                <span class="route-arrow" aria-hidden="true"></span>
+                <span>Kottayam Pazhaya Seminary</span>
+                <span class="route-arrow" aria-hidden="true"></span>
+                <span>Vagamon Adventure Park</span>
               </div>
               <p>
-                A scenic route with viewpoints, fresh air, and relaxed stopovers
-                through the day.
+                A spiritual trail through dayaras and the seminary, ending with
+                a Vagamon hill adventure.
               </p>
+              <ul
+                class="route-details"
+                aria-label="The Highlands Pilgrimage travel details"
+              >
+                <li>Travel time: ~6 hours</li>
+                <li>Approx. distance: 218 km</li>
+              </ul>
             </label>
 
-            <label class="option-card" data-theme="green" data-choice="Lakeside Retreat">
+            <label
+              class="option-card"
+              data-theme="green"
+              data-choice="Lakeside Retreat"
+            >
               <input type="radio" name="tourOption" value="Lakeside Retreat" />
               <div class="card-top">
                 <span class="option-tag">Option 02</span>
                 <span class="radio-dot" aria-hidden="true"></span>
               </div>
-              <h3>Lakeside Retreat</h3>
-              <div class="route-flow" aria-label="Lakeside Retreat route">
-                <span>Church Ground</span>
-                <span class="route-arrow">-></span>
-                <span>Lakeside Camp</span>
-                <span class="route-arrow">-></span>
-                <span>Picnic Point</span>
+              <h3>Coastal Heritage Trail</h3>
+              <div class="route-flow" aria-label="Coastal Heritage Trail route">
+                <span>Thiruvithamcode Arappally</span>
+                <span class="route-arrow" aria-hidden="true"></span>
+                <span>Padmanabhapuram Palace</span>
+                <span class="route-arrow" aria-hidden="true"></span>
+                <span>Kovalam Beach</span>
               </div>
               <p>
-                A slower-paced outing focused on togetherness, food, conversation,
-                and easy group time.
+                A journey through historic heritage sites and a refreshing
+                coastal experience.
               </p>
+              <ul
+                class="route-details"
+                aria-label="Coastal Heritage Trail travel details"
+              >
+                <li>Travel time: ~8 hours</li>
+                <li>Approx. distance: 369 km</li>
+              </ul>
             </label>
 
-            <label class="option-card" data-theme="sky" data-choice="City Discovery">
+            <label
+              class="option-card"
+              data-theme="sky"
+              data-choice="City Discovery"
+            >
               <input type="radio" name="tourOption" value="City Discovery" />
               <div class="card-top">
                 <span class="option-tag">Option 03</span>
@@ -109,20 +141,31 @@
               <h3>City Discovery</h3>
               <div class="route-flow" aria-label="City Discovery route">
                 <span>Museum Square</span>
-                <span class="route-arrow">-></span>
+                <span class="route-arrow" aria-hidden="true"></span>
                 <span>City Center</span>
-                <span class="route-arrow">-></span>
+                <span class="route-arrow" aria-hidden="true"></span>
                 <span>Food Street</span>
               </div>
               <p>
                 A higher-energy day with landmark stops, food breaks, and a more
                 active schedule.
               </p>
+              <ul
+                class="route-details"
+                aria-label="City Discovery travel details"
+              >
+                <li>Travel time: ~3 hr 10 min</li>
+                <li>Approx. distance: 92 km</li>
+              </ul>
             </label>
           </div>
 
           <section class="form-shell">
-            <div id="celebration-layer" class="celebration-layer" aria-hidden="true"></div>
+            <div
+              id="celebration-layer"
+              class="celebration-layer"
+              aria-hidden="true"
+            ></div>
             <div class="form-head">
               <div>
                 <p class="eyebrow">Share your additional thoughts</p>
@@ -138,14 +181,13 @@
 
               <div class="field full">
                 <label for="note">Add a note (optional)</label>
-                <textarea
-                  id="note"
-                  name="note"
-                ></textarea>
+                <textarea id="note" name="note"></textarea>
               </div>
 
               <div class="actions">
-                <button class="submit-button" type="submit">Submit Vote</button>
+                <button class="submit-button" type="submit">
+                  Submit My Vote
+                </button>
                 <p id="form-status" class="status" aria-live="polite"></p>
               </div>
             </form>

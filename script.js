@@ -69,7 +69,7 @@ function updateVoteAvailability() {
   }
 
   if (!submitButton.disabled || submitButton.textContent === "Vote Limit Reached") {
-    submitButton.textContent = "Submit Vote";
+    submitButton.textContent = "Submit My Vote";
   }
 }
 
