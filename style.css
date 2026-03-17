@@ -452,6 +452,10 @@ h2 {
   background: linear-gradient(180deg, #dfe7ff 0%, #c4d5ff 100%);
 }
 
+.option-card[data-theme="coral"] {
+  background: linear-gradient(180deg, #ffd6cc 0%, #ffbfae 100%);
+}
+
 .form-shell {
   position: relative;
   margin-top: 1.5rem;
@@ -732,7 +736,7 @@ textarea:focus {
   }
 
   .options-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.1rem;
   }
 
@@ -743,7 +747,7 @@ textarea:focus {
   }
 
   .results-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.1rem;
   }
 
