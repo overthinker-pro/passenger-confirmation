@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -18,10 +18,10 @@
         <article class="results-hero">
           <div>
             <p class="eyebrow">Bethany Tour 2026 / Live Analytics</p>
-            <h1>Track the group preference in real time.</h1>
+            <h1>The Voice of the Group</h1>
             <p class="hero-text">
-              This page refreshes the current tour counts automatically so organizers
-              can see how the community is leaning.
+              Poll data is live and completely anonymous. None of the voters'
+              personal information is collected or displayed.
             </p>
             <div class="hero-actions">
               <a class="secondary-link" href="index.html">Back to Voting</a>
@@ -53,14 +53,7 @@
           <div class="panel-header">
             <div>
               <p class="eyebrow">Results Board</p>
-              <h2 id="results-title">Live vote distribution</h2>
-              <p class="panel-text">
-                Counts and percentages refresh every 5 seconds using the same poll data.
-              </p>
-            </div>
-            <div class="live-badge" aria-live="polite">
-              <span class="live-badge-label">Auto refresh</span>
-              <strong>5s</strong>
+              <h2 id="results-title">Live vote analytics</h2>
             </div>
           </div>
 
@@ -69,6 +62,7 @@
               <div class="result-card-header">
                 <div>
                   <p class="result-label">Option 01</p>
+                  <br>
                   <h3>The Highlands Pilgrimage</h3>
                 </div>
                 <strong class="result-count" data-count>0 votes</strong>
@@ -87,13 +81,14 @@
               <div class="result-card-header">
                 <div>
                   <p class="result-label">Option 02</p>
+                  <br>
                   <h3>Coastal Heritage Trail</h3>
                 </div>
                 <strong class="result-count" data-count>0 votes</strong>
               </div>
               <p class="result-copy">
-                Tracing the footsteps of early Christianity, this journey explores
-                sacred sites rich in faith, history, and tradition.
+                Tracing the footsteps of early Christianity, this journey
+                explores sacred sites rich in faith, history, and tradition.
               </p>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-fill" data-fill></div>
@@ -101,10 +96,14 @@
               <p class="result-percent" data-percent>0%</p>
             </article>
 
-            <article class="result-card" data-choice="Sacred Hills & Forest Path">
+            <article
+              class="result-card"
+              data-choice="Sacred Hills & Forest Path"
+            >
               <div class="result-card-header">
                 <div>
                   <p class="result-label">Option 03</p>
+                  <br>
                   <h3>Sacred Hills & Forest Path</h3>
                 </div>
                 <strong class="result-count" data-count>0 votes</strong>
@@ -123,6 +122,7 @@
               <div class="result-card-header">
                 <div>
                   <p class="result-label">Option 04</p>
+                  <br>
                   <h3>Kochi Exploration</h3>
                 </div>
                 <strong class="result-count" data-count>0 votes</strong>
@@ -139,7 +139,11 @@
           </div>
 
           <div class="results-status-wrap">
-            <p id="results-status" class="status status-pill" aria-live="polite"></p>
+            <p
+              id="results-status"
+              class="status status-pill"
+              aria-live="polite"
+            ></p>
           </div>
         </section>
       </section>

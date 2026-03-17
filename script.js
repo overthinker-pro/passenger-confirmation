@@ -14,7 +14,7 @@ const submitButton = voteForm.querySelector(".submit-button");
 const statusText = document.getElementById("form-status");
 const countdownTimer = document.getElementById("countdown-timer");
 const celebrationLayer = document.getElementById("celebration-layer");
-const COUNTDOWN_TARGET = new Date(2026, 2, 28, 0, 0, 0);
+const COUNTDOWN_TARGET = new Date(2026, 2, 31, 0, 0, 0);
 
 function hasVotingClosed() {
   return Date.now() >= COUNTDOWN_TARGET.getTime();
