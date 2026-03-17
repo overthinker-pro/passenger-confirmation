@@ -233,7 +233,7 @@ h2 {
   flex-direction: column;
   align-items: center;
   gap: 0.15rem;
-  width: 150px;
+  width: 175px;
   padding: 0.8rem 1rem;
   border-radius: 999px;
   background: rgba(31, 122, 76, 0.1);
@@ -510,6 +510,7 @@ form {
 }
 
 .field.full {
+  margin-top: 20px;
   grid-column: 1 / -1;
 }
 
@@ -588,6 +589,42 @@ textarea:focus {
   padding: 1.25rem;
 }
 
+.results-panel {
+  position: relative;
+}
+
+.results-loader {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.74);
+  backdrop-filter: blur(6px);
+  z-index: 2;
+  border-radius: inherit;
+}
+
+.results-loader.is-visible {
+  display: flex;
+}
+
+.results-loader p {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.results-spinner {
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 50%;
+  border: 3px solid rgba(31, 41, 55, 0.12);
+  border-top-color: var(--accent);
+  animation: spin 850ms linear infinite;
+}
+
 .results-meta-grid,
 .results-grid {
   display: grid;
@@ -655,18 +692,45 @@ textarea:focus {
   box-shadow: 0 24px 48px rgba(159, 63, 23, 0.16);
 }
 
+.results-status-wrap {
+  grid-column: 1 / -1;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 1.25rem;
+}
+
 .status {
   min-height: 1.5rem;
   font-size: 0.95rem;
   font-weight: 600;
 }
 
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin-inline: auto;
+  min-height: 2.8rem;
+  padding: 0.7rem 1.15rem;
+  border-radius: 999px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(31, 41, 55, 0.08);
+  box-shadow: 0 10px 24px rgba(31, 41, 55, 0.08);
+}
+
 .status[data-state="success"] {
   color: var(--success);
+  background: rgba(31, 122, 76, 0.1);
+  border-color: rgba(31, 122, 76, 0.18);
 }
 
 .status[data-state="error"] {
   color: var(--error);
+  background: rgba(181, 51, 51, 0.08);
+  border-color: rgba(181, 51, 51, 0.18);
 }
 
 @media (min-width: 700px) {
@@ -892,5 +956,11 @@ textarea:focus {
 
   100% {
     background-position: 200% 50%;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }

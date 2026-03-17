@@ -7,6 +7,8 @@ const totalVotes = document.getElementById("total-votes");
 const leadingOption = document.getElementById("leading-option");
 const lastUpdated = document.getElementById("last-updated");
 const resultsStatus = document.getElementById("results-status");
+const resultsLoader = document.getElementById("results-loader");
+let hasCompletedInitialLoad = false;
 
 function formatTimestamp(date) {
   return date.toLocaleTimeString([], {
@@ -52,8 +54,19 @@ function updateResultsView(summary, total) {
 }
 
 async function fetchResults() {
-  if (!resultCards.length || !totalVotes || !leadingOption || !lastUpdated || !resultsStatus) {
+  if (
+    !resultCards.length ||
+    !totalVotes ||
+    !leadingOption ||
+    !lastUpdated ||
+    !resultsStatus ||
+    !resultsLoader
+  ) {
     return;
+  }
+
+  if (!hasCompletedInitialLoad) {
+    resultsLoader.classList.add("is-visible");
   }
 
   resultsStatus.dataset.state = "";
@@ -84,10 +97,15 @@ async function fetchResults() {
 
     updateResultsView(result.summary || {}, Number(result.total || 0));
     resultsStatus.dataset.state = "success";
-    resultsStatus.textContent = "Results are live.";
+    resultsStatus.textContent = "Results are live🚨";
+    hasCompletedInitialLoad = true;
   } catch (error) {
     resultsStatus.dataset.state = "error";
     resultsStatus.textContent = error.message || "Unable to load results right now.";
+  } finally {
+    if (!hasCompletedInitialLoad || resultsStatus.dataset.state === "success") {
+      resultsLoader.classList.remove("is-visible");
+    }
   }
 }
 

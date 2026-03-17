@@ -1,7 +1,7 @@
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
 const DEFAULT_CHOICE = "";
-const MAX_VOTES_PER_DEVICE = 5;
+const MAX_VOTES_PER_DEVICE = 4;
 const DEVICE_ID_STORAGE_KEY = "bethany_tour_device_id";
 const DEVICE_VOTE_COUNT_STORAGE_KEY = "bethany_tour_vote_count";
 const NO_SELECTION_LABEL = "No option selected";

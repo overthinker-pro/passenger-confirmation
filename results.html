@@ -45,6 +45,11 @@
         </article>
 
         <section class="results-panel" aria-labelledby="results-title">
+          <div id="results-loader" class="results-loader" aria-live="polite">
+            <div class="results-spinner" aria-hidden="true"></div>
+            <p>Loading live results...</p>
+          </div>
+
           <div class="panel-header">
             <div>
               <p class="eyebrow">Results Board</p>
@@ -69,7 +74,8 @@
                 <strong class="result-count" data-count>0 votes</strong>
               </div>
               <p class="result-copy">
-                Scenic viewpoints, mountain air, and a relaxed day built around nature.
+                A spiritual trail through dayaras and the seminary, ending with
+                a Vagamon hill adventure.
               </p>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-fill" data-fill></div>
@@ -86,7 +92,8 @@
                 <strong class="result-count" data-count>0 votes</strong>
               </div>
               <p class="result-copy">
-                Gentle pacing, easy fellowship, and a more relaxed group outing.
+                Tracing the footsteps of early Christianity, this journey explores
+                sacred sites rich in faith, history, and tradition.
               </p>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-fill" data-fill></div>
@@ -94,16 +101,17 @@
               <p class="result-percent" data-percent>0%</p>
             </article>
 
-            <article class="result-card" data-choice="City Discovery">
+            <article class="result-card" data-choice="Sacred Hills & Forest Path">
               <div class="result-card-header">
                 <div>
                   <p class="result-label">Option 03</p>
-                  <h3>City Discovery</h3>
+                  <h3>Sacred Hills & Forest Path</h3>
                 </div>
                 <strong class="result-count" data-count>0 votes</strong>
               </div>
               <p class="result-copy">
-                A busier day with landmarks, stops, and more variety through the trip.
+                Experience monastic heritage and the calm beauty of Kerala's
+                forest landscapes.
               </p>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-fill" data-fill></div>
@@ -111,16 +119,17 @@
               <p class="result-percent" data-percent>0%</p>
             </article>
 
-            <article class="result-card" data-choice="Backwater Serenity Circuit">
+            <article class="result-card" data-choice="Kochi Exploration">
               <div class="result-card-header">
                 <div>
                   <p class="result-label">Option 04</p>
-                  <h3>Backwater Serenity Circuit</h3>
+                  <h3>Kochi Exploration</h3>
                 </div>
                 <strong class="result-count" data-count>0 votes</strong>
               </div>
               <p class="result-copy">
-                A quieter waterside option with cruise time, birdlife, and gentle scenery.
+                A meaningful journey through Orthodox heritage and church
+                history, followed by a relaxing and enjoyable time in Kochi.
               </p>
               <div class="progress-track" aria-hidden="true">
                 <div class="progress-fill" data-fill></div>
@@ -129,7 +138,9 @@
             </article>
           </div>
 
-          <p id="results-status" class="status" aria-live="polite"></p>
+          <div class="results-status-wrap">
+            <p id="results-status" class="status status-pill" aria-live="polite"></p>
+          </div>
         </section>
       </section>
     </main>
