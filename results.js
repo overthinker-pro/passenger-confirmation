@@ -1,6 +1,9 @@
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
 const REFRESH_INTERVAL_MS = 5000;
+const AUTH_ID = "REALME2005";
+const AUTH_CODE = "807837";
+const CLOSED_PAGE_URL = "closed.html";
 
 const resultCards = document.querySelectorAll(".result-card");
 const totalVotes = document.getElementById("total-votes");
@@ -8,7 +11,47 @@ const leadingOption = document.getElementById("leading-option");
 const lastUpdated = document.getElementById("last-updated");
 const resultsStatus = document.getElementById("results-status");
 const resultsLoader = document.getElementById("results-loader");
+const adminAccessTrigger = document.getElementById("admin-access-trigger");
+const authModal = document.getElementById("auth-modal");
+const authForm = document.getElementById("auth-form");
+const authStatus = document.getElementById("auth-status");
+const authCloseButton = document.getElementById("auth-close-button");
+const authIdInput = document.getElementById("auth-id");
+const authCodeInput = document.getElementById("auth-code");
 let hasCompletedInitialLoad = false;
+
+function openAuthModal() {
+  if (!authModal || !authIdInput) {
+    return;
+  }
+
+  authModal.hidden = false;
+  authModal.setAttribute("aria-hidden", "false");
+
+  if (authStatus) {
+    authStatus.dataset.state = "";
+    authStatus.textContent = "";
+  }
+
+  window.setTimeout(() => {
+    authIdInput.focus();
+  }, 0);
+}
+
+function closeAuthModal() {
+  if (!authModal || !authForm) {
+    return;
+  }
+
+  authModal.hidden = true;
+  authModal.setAttribute("aria-hidden", "true");
+  authForm.reset();
+
+  if (authStatus) {
+    authStatus.dataset.state = "";
+    authStatus.textContent = "";
+  }
+}
 
 function formatTimestamp(date) {
   return date.toLocaleTimeString([], {
@@ -125,3 +168,46 @@ async function fetchResults() {
 
 fetchResults();
 window.setInterval(fetchResults, REFRESH_INTERVAL_MS);
+
+adminAccessTrigger?.addEventListener("click", () => {
+  openAuthModal();
+});
+
+authCloseButton?.addEventListener("click", () => {
+  closeAuthModal();
+});
+
+authModal?.addEventListener("click", (event) => {
+  const target = event.target;
+
+  if (target instanceof HTMLElement && target.hasAttribute("data-auth-close")) {
+    closeAuthModal();
+  }
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && authModal && !authModal.hidden) {
+    closeAuthModal();
+  }
+});
+
+authForm?.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  if (!authIdInput || !authCodeInput || !authStatus) {
+    return;
+  }
+
+  const enteredId = authIdInput.value.trim();
+  const enteredCode = authCodeInput.value.trim();
+
+  if (enteredId === AUTH_ID && enteredCode === AUTH_CODE) {
+    authStatus.dataset.state = "success";
+    authStatus.textContent = "Authorization successful.";
+    window.location.href = CLOSED_PAGE_URL;
+    return;
+  }
+
+  authStatus.dataset.state = "error";
+  authStatus.textContent = "Invalid authentication ID or code.";
+});

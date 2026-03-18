@@ -48,6 +48,14 @@
             </p>
             <div class="hero-actions">
               <a class="secondary-link" href="index.html">Back to Voting</a>
+              <button
+                id="admin-access-trigger"
+                class="secret-access-button"
+                type="button"
+                aria-label="Open authorized access"
+              >
+                <span class="secret-access-glyph" aria-hidden="true"></span>
+              </button>
             </div>
           </div>
 
@@ -171,6 +179,54 @@
         </section>
       </section>
     </main>
+
+    <div id="auth-modal" class="auth-modal" aria-hidden="true" hidden>
+      <div class="auth-modal-backdrop" data-auth-close></div>
+      <section
+        class="auth-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-dialog-title"
+      >
+        <div class="auth-dialog-head">
+          <p class="eyebrow">Restricted Access</p>
+          <button
+            id="auth-close-button"
+            class="auth-close-button"
+            type="button"
+            aria-label="Close authorization dialog"
+          >
+            ×
+          </button>
+        </div>
+        <h2 id="auth-dialog-title">Authorize access to the closed page</h2>
+        <p class="panel-text">
+          Enter the authentication ID and code to continue.
+        </p>
+
+        <form id="auth-form" class="auth-form">
+          <div class="field">
+            <label for="auth-id">Authentication ID</label>
+            <input id="auth-id" name="authId" type="text" autocomplete="off" />
+          </div>
+
+          <div class="field">
+            <label for="auth-code">Code</label>
+            <input
+              id="auth-code"
+              name="authCode"
+              type="password"
+              autocomplete="off"
+            />
+          </div>
+
+          <div class="auth-actions">
+            <button class="submit-button" type="submit">Authorize</button>
+            <p id="auth-status" class="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+    </div>
 
     <script src="results.js"></script>
   </body>
