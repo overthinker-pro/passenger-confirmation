@@ -21,6 +21,7 @@ function formatTimestamp(date) {
 function updateResultsView(summary, total) {
   let leaderChoice = "Awaiting votes";
   let leaderCount = 0;
+  const leaderChoices = [];
 
   resultCards.forEach((card) => {
     const choice = card.dataset.choice;
@@ -38,13 +39,26 @@ function updateResultsView(summary, total) {
     if (count > leaderCount) {
       leaderChoice = choice;
       leaderCount = count;
+      leaderChoices.length = 0;
+      leaderChoices.push(choice);
+    } else if (count > 0 && count === leaderCount) {
+      leaderChoices.push(choice);
     }
   });
 
   if (leaderCount > 0) {
-    const leaderCard = document.querySelector(`.result-card[data-choice="${leaderChoice}"]`);
-    if (leaderCard) {
-      leaderCard.classList.add("is-leading");
+    leaderChoices.forEach((choice) => {
+      const leaderCard = document.querySelector(
+        `.result-card[data-choice="${choice}"]`
+      );
+
+      if (leaderCard) {
+        leaderCard.classList.add("is-leading");
+      }
+    });
+
+    if (leaderChoices.length > 1) {
+      leaderChoice = `${leaderChoices.length} options tied`;
     }
   }
 
