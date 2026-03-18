@@ -48,14 +48,6 @@
             </p>
             <div class="hero-actions">
               <a class="secondary-link" href="index.html">Back to Voting</a>
-              <button
-                id="admin-access-trigger"
-                class="secret-access-button"
-                type="button"
-                aria-label="Open authorized access"
-              >
-                <span class="secret-access-glyph" aria-hidden="true"></span>
-              </button>
             </div>
           </div>
 
@@ -170,11 +162,21 @@
           </div>
 
           <div class="results-status-wrap">
-            <p
-              id="results-status"
-              class="status status-pill"
-              aria-live="polite"
-            ></p>
+            <div class="results-status-row">
+              <p
+                id="results-status"
+                class="status status-pill"
+                aria-live="polite"
+              ></p>
+              <button
+                id="admin-access-trigger"
+                class="secret-access-button"
+                type="button"
+                aria-label="Open authorized access"
+              >
+                <span class="secret-access-glyph" aria-hidden="true"></span>
+              </button>
+            </div>
           </div>
         </section>
       </section>
