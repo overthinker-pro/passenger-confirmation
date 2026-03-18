@@ -870,6 +870,7 @@ textarea:focus {
   .form-shell {
     margin-top: 1.75rem;
   }
+
 }
 
 @media (min-width: 1200px) {
@@ -923,6 +924,7 @@ textarea:focus {
   .option-card:nth-child(3) {
     animation-delay: 200ms;
   }
+
 }
 
 @keyframes rise-in {
