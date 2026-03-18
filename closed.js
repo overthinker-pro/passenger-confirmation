@@ -1,5 +1,6 @@
 const GOOGLE_SCRIPT_URL =
   "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
+const REFRESH_INTERVAL_MS = 7000;
 
 const ROUTE_DETAILS = {
   "The Highlands Pilgrimage": {
@@ -306,3 +307,4 @@ winnerCard?.addEventListener("click", () => {
 
 setWinnerDetailVisibility(false);
 fetchClosedResults();
+window.setInterval(fetchClosedResults, REFRESH_INTERVAL_MS);
