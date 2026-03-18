@@ -49,47 +49,127 @@
           <span class="closed-kicker">Final Appreciation Note</span>
           <h1>Thank You For Voting</h1>
           <p class="hero-text">
-            The poll is now complete. This page presents the final walkthrough
-            of the group's response, together with a guide character and the
-            strongest tour choices from the vote.
+            The poll is now complete. The winning route is shown below as one
+            featured card. Tap it to open the full tour breakdown from start to
+            finish.
           </p>
           <div class="closed-chip-row" aria-label="Poll summary">
             <span class="closed-chip">Anonymous Poll</span>
-            <span class="closed-chip">Final Snapshot</span>
+            <span class="closed-chip">Winning Route</span>
             <span class="closed-chip">Bethany Tour 2026</span>
           </div>
         </article>
 
-        <section class="guide-stage" aria-label="Thank you illustration">
-          <div class="guide-copy">
-            <div class="speech-bubble">
-              <p class="speech-label">Guide's Note</p>
-              <h2 id="closed-message-title">The poll has officially closed.</h2>
-              <p id="closed-message-copy">
-                Thanks for showing up and sharing your opinion. I am preparing
-                the final spoken summary now.
+        <section class="winner-stage" aria-labelledby="winner-title">
+          <div class="winner-stage-head">
+            <div>
+              <p class="eyebrow">Final Route Reveal</p>
+              <h2 id="winner-title">One winning route. One complete breakdown.</h2>
+              <p class="winner-copy" id="winner-summary">
+                Loading the final winning route now.
               </p>
-              <ol class="speech-sequence" aria-label="Spoken final snapshot">
-                <li class="speech-line" id="speech-line-total">
-                  Final votes are being counted.
-                </li>
-                <li class="speech-line" id="speech-line-leading">
-                  The top response is being identified.
-                </li>
-                <li class="speech-line" id="speech-line-summary">
-                  I will share the final snapshot here in a moment.
-                </li>
-              </ol>
             </div>
 
-            <div class="guide-figure-shell" aria-label="Guide character">
-              <img
-                class="guide-figure-image"
-                src="sapiens.svg"
-                alt="Guide character"
-              />
+            <div class="winner-stats" aria-label="Winning route summary">
+              <article class="winner-stat-card">
+                <span class="winner-stat-label">Total votes</span>
+                <strong id="winner-total-votes">0</strong>
+              </article>
+              <article class="winner-stat-card">
+                <span class="winner-stat-label">Vote share</span>
+                <strong id="winner-percent">0%</strong>
+              </article>
+              <article class="winner-stat-card">
+                <span class="winner-stat-label">Final update</span>
+                <strong id="winner-last-updated">Checking...</strong>
+              </article>
             </div>
           </div>
+
+          <button
+            id="winner-card"
+            class="winner-card"
+            type="button"
+            aria-expanded="false"
+            aria-controls="winner-detail-panel"
+            data-theme="sunrise"
+          >
+            <div class="card-top">
+              <span class="option-tag" id="winner-option-label">Winning Route</span>
+              <span class="winner-badge" id="winner-badge">Tap to open full plan</span>
+            </div>
+
+            <h3 id="winner-route-title">Awaiting results</h3>
+
+            <div class="trip-meta">
+              <span id="winner-votes-pill">0 votes</span>
+              <span id="winner-distance-pill">Approx. distance: --</span>
+              <span id="winner-time-pill">Travel time: --</span>
+            </div>
+
+            <div class="route-flow" id="winner-route-flow" aria-label="Winning route preview">
+              <span>Final route is loading</span>
+            </div>
+
+            <p id="winner-description">
+              The final winning route will appear here once the poll data is loaded.
+            </p>
+
+            <div class="winner-progress-wrap">
+              <div class="winner-progress-track" aria-hidden="true">
+                <div class="winner-progress-fill" id="winner-progress-fill"></div>
+              </div>
+              <p class="winner-progress-copy" id="winner-progress-copy">
+                Waiting for the final percentage.
+              </p>
+            </div>
+          </button>
+
+          <section
+            id="winner-detail-panel"
+            class="winner-detail-panel"
+            aria-label="Winning route details"
+            hidden
+          >
+            <div class="detail-grid">
+              <article class="detail-block">
+                <p class="detail-label">Tour overview</p>
+                <h3 id="detail-route-title">Awaiting results</h3>
+                <p id="detail-overview">
+                  The expanded tour overview will appear here when the final result loads.
+                </p>
+              </article>
+
+              <article class="detail-block">
+                <p class="detail-label">Why this route stood out</p>
+                <ul class="detail-list" id="detail-highlights"></ul>
+              </article>
+
+              <article class="detail-block detail-block-wide">
+                <p class="detail-label">Full route plan</p>
+                <ol class="route-stop-list" id="detail-stops"></ol>
+              </article>
+
+              <article class="detail-block">
+                <p class="detail-label">Travel details</p>
+                <ul class="detail-list">
+                  <li id="detail-time">Travel time: --</li>
+                  <li id="detail-distance">Approx. distance: --</li>
+                  <li id="detail-votes">Final votes: 0</li>
+                  <li id="detail-share">Vote share: 0%</li>
+                </ul>
+              </article>
+
+              <article class="detail-block">
+                <p class="detail-label">Final result note</p>
+                <p id="detail-final-note">
+                  The final note will update when the result is available.
+                </p>
+              </article>
+            </div>
+          </section>
+
+          <p id="winner-status" class="winner-status" aria-live="polite"></p>
         </section>
       </section>
     </main>
