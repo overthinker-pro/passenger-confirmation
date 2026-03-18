@@ -5,6 +5,7 @@ const MAX_VOTES_PER_DEVICE = 4;
 const DEVICE_ID_STORAGE_KEY = "bethany_tour_device_id";
 const DEVICE_VOTE_COUNT_STORAGE_KEY = "bethany_tour_vote_count";
 const NO_SELECTION_LABEL = "No option selected";
+const CLOSED_PAGE_URL = "closed.html";
 
 const optionCards = document.querySelectorAll(".option-card");
 const selectedChoice = document.getElementById("selected-choice");
@@ -18,6 +19,14 @@ const COUNTDOWN_TARGET = new Date(2026, 2, 31, 0, 0, 0);
 
 function hasVotingClosed() {
   return Date.now() >= COUNTDOWN_TARGET.getTime();
+}
+
+function redirectToClosedPage() {
+  if (window.location.pathname.endsWith(`/${CLOSED_PAGE_URL}`) || window.location.pathname.endsWith(CLOSED_PAGE_URL)) {
+    return;
+  }
+
+  window.location.replace(CLOSED_PAGE_URL);
 }
 
 function generateDeviceId() {
@@ -50,10 +59,7 @@ function setStoredVoteCount(count) {
 
 function updateVoteAvailability() {
   if (hasVotingClosed()) {
-    submitButton.disabled = true;
-    submitButton.textContent = "Voting Closed";
-    statusText.dataset.state = "error";
-    statusText.textContent = "Voting has closed.";
+    redirectToClosedPage();
     return;
   }
 
@@ -96,7 +102,7 @@ function startCountdown() {
 
     if (timeRemaining <= 0) {
       countdownTimer.textContent = "00:00:00";
-      updateVoteAvailability();
+      redirectToClosedPage();
       return false;
     }
 
@@ -158,6 +164,10 @@ optionCards.forEach((card) => {
     setSelectedOption(card.dataset.choice);
   });
 });
+
+if (hasVotingClosed()) {
+  redirectToClosedPage();
+}
 
 startCountdown();
 updateVoteAvailability();

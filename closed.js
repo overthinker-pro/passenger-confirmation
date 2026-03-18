@@ -6,6 +6,10 @@ const closedMessageCopy = document.getElementById("closed-message-copy");
 const speechLineTotal = document.getElementById("speech-line-total");
 const speechLineLeading = document.getElementById("speech-line-leading");
 const speechLineSummary = document.getElementById("speech-line-summary");
+const speechLines = [speechLineTotal, speechLineLeading, speechLineSummary].filter(Boolean);
+const DIALOGUE_DURATION_MS = 3000;
+
+let speechRotationTimeoutId = null;
 
 function getLeaderData(summary) {
   let leaderCount = 0;
@@ -27,21 +31,34 @@ function getLeaderData(summary) {
 }
 
 function revealSpeechLines() {
-  [speechLineTotal, speechLineLeading, speechLineSummary].forEach((line) => {
-    if (line) {
-      line.classList.remove("is-visible");
-    }
+  if (!speechLines.length) {
+    return;
+  }
+
+  if (speechRotationTimeoutId) {
+    window.clearTimeout(speechRotationTimeoutId);
+  }
+
+  speechLines.forEach((line) => {
+    line.classList.remove("is-visible");
   });
 
-  [speechLineTotal, speechLineLeading, speechLineSummary].forEach((line, index) => {
-    if (!line) {
+  let activeIndex = 0;
+
+  const showLine = () => {
+    speechLines.forEach((line, index) => {
+      line.classList.toggle("is-visible", index === activeIndex);
+    });
+
+    if (activeIndex >= speechLines.length - 1) {
       return;
     }
 
-    window.setTimeout(() => {
-      line.classList.add("is-visible");
-    }, 240 * (index + 1));
-  });
+    activeIndex += 1;
+    speechRotationTimeoutId = window.setTimeout(showLine, DIALOGUE_DURATION_MS);
+  };
+
+  showLine();
 }
 
 function updateClosedMessage(total, leaders, leaderSummary) {
