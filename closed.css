@@ -209,7 +209,7 @@ button:focus-visible {
   max-width: 11ch;
   font-size: clamp(3rem, 8vw, 5.9rem);
   line-height: 0.9;
-  letter-spacing: -0.07em;
+  letter-spacing: 0.001em;
   text-align: center;
   text-wrap: balance;
 }
