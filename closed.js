@@ -83,6 +83,28 @@ const routeStops = [
 
 const routeStopsContainer = document.getElementById("route-stops");
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const mobileRouteAccordion = window.matchMedia("(max-width: 759px)");
+
+function updatePinButtonText(button, isOpen) {
+  const pinText = button.querySelector(".pin-text");
+  if (pinText) {
+    pinText.textContent = isOpen ? "Close schedule" : "Open schedule";
+  }
+}
+
+function closeRouteCard(card) {
+  const button = card.querySelector(".pin-button");
+  const detailPanel = card.querySelector(".detail-panel");
+
+  if (!button || !detailPanel || !card.classList.contains("is-open")) {
+    return;
+  }
+
+  card.classList.remove("is-open");
+  button.setAttribute("aria-expanded", "false");
+  updatePinButtonText(button, false);
+  setPanelOpenState(detailPanel, false);
+}
 
 function setPanelOpenState(detailPanel, shouldOpen) {
   if (prefersReducedMotion.matches) {
@@ -187,14 +209,20 @@ function createRouteStop(stop, index) {
   `;
 
   button.addEventListener("click", () => {
-    const isOpen = card.classList.toggle("is-open");
+    const shouldOpen = !card.classList.contains("is-open");
+
+    if (shouldOpen && mobileRouteAccordion.matches && routeStopsContainer) {
+      routeStopsContainer.querySelectorAll(".stop-card.is-open").forEach((openCard) => {
+        if (openCard !== card) {
+          closeRouteCard(openCard);
+        }
+      });
+    }
+
+    const isOpen = card.classList.toggle("is-open", shouldOpen);
     button.setAttribute("aria-expanded", String(isOpen));
     setPanelOpenState(detailPanel, isOpen);
-
-    const pinText = button.querySelector(".pin-text");
-    if (pinText) {
-      pinText.textContent = isOpen ? "Close schedule" : "Open schedule";
-    }
+    updatePinButtonText(button, isOpen);
   });
 
   card.append(button, detailPanel);
