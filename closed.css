@@ -231,6 +231,67 @@ button:focus-visible {
   margin-top: 1.3rem;
 }
 
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.72rem;
+  margin-top: 1.25rem;
+  padding: 0.84rem 1.34rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(135deg, #7ff0d8, #33c7c5);
+  color: #103a51;
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: 0 16px 28px rgba(42, 156, 160, 0.24);
+  transition:
+    transform var(--dur-fast) var(--ease-smooth),
+    box-shadow var(--dur-fast) var(--ease-soft),
+    filter var(--dur-fast) var(--ease-soft),
+    border-color var(--dur-fast) var(--ease-soft);
+  animation: hero-button-pulse 2.4s ease-in-out infinite;
+}
+
+.hero-button:hover,
+.hero-button:focus-visible {
+  transform: translateY(-0.14rem);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 18px 32px rgba(42, 156, 160, 0.3);
+  filter: saturate(1.08);
+  outline: none;
+}
+
+.hero-button-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.72rem;
+  border-radius: 999px;
+  background: rgba(16, 58, 81, 0.14);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.hero-button-badge::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: #103a51;
+  box-shadow: 0 0 0 0 rgba(16, 58, 81, 0.35);
+  animation: hero-button-dot 1.8s ease-out infinite;
+}
+
+.hero-button-label {
+  position: relative;
+}
+
 .hero-chip-row span {
   display: inline-flex;
   padding: 0.78rem 0.96rem;
@@ -272,6 +333,8 @@ button:focus-visible {
 .route-board {
   padding: 1.2rem;
   color: #fff8ef;
+  content-visibility: auto;
+  contain-intrinsic-size: 900px;
   background:
     radial-gradient(circle at 78% 18%, rgba(255, 168, 82, 0.16), transparent 18rem),
     linear-gradient(135deg, rgba(10, 28, 55, 0.96) 0%, rgba(19, 55, 98, 0.94) 52%, rgba(35, 102, 132, 0.9) 100%);
@@ -493,23 +556,24 @@ button:focus-visible {
 
 .detail-panel {
   margin-top: 1rem;
-  overflow: hidden;
-  opacity: 1;
-  transform: translateY(0);
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-0.35rem);
   transition:
-    height var(--dur-med) var(--ease-smooth),
+    grid-template-rows 280ms var(--ease-smooth),
     opacity var(--dur-fast) var(--ease-soft),
     transform var(--dur-med) var(--ease-smooth);
-  will-change: height, opacity, transform;
 }
 
-.detail-panel[hidden] {
-  display: none;
+.detail-panel-inner {
+  overflow: hidden;
 }
 
-.detail-panel.is-collapsed {
-  opacity: 0;
-  transform: translateY(-0.45rem);
+.stop-card.is-open .detail-panel {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .detail-grid {
@@ -621,17 +685,6 @@ button:focus-visible {
     animation: rise-in 680ms ease both;
   }
 
-  body::before,
-  body::after,
-  .route-board,
-  .hero-stage,
-  .route-spine,
-  .stop-card,
-  .pin-button,
-  .detail-panel {
-    will-change: transform, opacity;
-  }
-
   .route-spine {
     animation: spine-flow 4.8s linear infinite;
   }
@@ -644,7 +697,6 @@ button:focus-visible {
 
   .detail-panel {
     transition: none;
-    will-change: auto;
   }
 }
 
@@ -672,6 +724,33 @@ button:focus-visible {
     box-shadow:
       0 0 0 18px rgba(255, 141, 42, 0.08),
       0 0 36px rgba(31, 79, 130, 0.12);
+  }
+}
+
+@keyframes hero-button-pulse {
+  0%,
+  100% {
+    box-shadow: 0 16px 28px rgba(42, 156, 160, 0.24);
+  }
+
+  50% {
+    box-shadow:
+      0 18px 32px rgba(42, 156, 160, 0.3),
+      0 0 0 10px rgba(127, 240, 216, 0.1);
+  }
+}
+
+@keyframes hero-button-dot {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 58, 81, 0.35);
+  }
+
+  70% {
+    box-shadow: 0 0 0 8px rgba(16, 58, 81, 0);
+  }
+
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 248, 239, 0);
   }
 }
 

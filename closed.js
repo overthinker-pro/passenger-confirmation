@@ -82,7 +82,6 @@ const routeStops = [
 ];
 
 const routeStopsContainer = document.getElementById("route-stops");
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const mobileRouteAccordion = window.matchMedia("(max-width: 759px)");
 
 function updatePinButtonText(button, isOpen) {
@@ -94,71 +93,14 @@ function updatePinButtonText(button, isOpen) {
 
 function closeRouteCard(card) {
   const button = card.querySelector(".pin-button");
-  const detailPanel = card.querySelector(".detail-panel");
 
-  if (!button || !detailPanel || !card.classList.contains("is-open")) {
+  if (!button || !card.classList.contains("is-open")) {
     return;
   }
 
   card.classList.remove("is-open");
   button.setAttribute("aria-expanded", "false");
   updatePinButtonText(button, false);
-  setPanelOpenState(detailPanel, false);
-}
-
-function setPanelOpenState(detailPanel, shouldOpen) {
-  if (prefersReducedMotion.matches) {
-    detailPanel.hidden = !shouldOpen;
-    detailPanel.classList.toggle("is-collapsed", !shouldOpen);
-    detailPanel.style.height = shouldOpen ? "auto" : "";
-    return;
-  }
-
-  detailPanel.style.transition = "none";
-
-  if (shouldOpen) {
-    detailPanel.hidden = false;
-    detailPanel.classList.remove("is-collapsed");
-    detailPanel.style.height = "0px";
-
-    requestAnimationFrame(() => {
-      const fullHeight = `${detailPanel.scrollHeight}px`;
-      detailPanel.style.transition = "";
-      detailPanel.style.height = fullHeight;
-    });
-
-    const handleOpenEnd = (event) => {
-      if (event.propertyName !== "height") {
-        return;
-      }
-
-      detailPanel.style.height = "auto";
-      detailPanel.removeEventListener("transitionend", handleOpenEnd);
-    };
-
-    detailPanel.addEventListener("transitionend", handleOpenEnd);
-    return;
-  }
-
-  detailPanel.style.height = `${detailPanel.scrollHeight}px`;
-  detailPanel.classList.add("is-collapsed");
-
-  requestAnimationFrame(() => {
-    detailPanel.style.transition = "";
-    detailPanel.style.height = "0px";
-  });
-
-  const handleCloseEnd = (event) => {
-    if (event.propertyName !== "height") {
-      return;
-    }
-
-    detailPanel.hidden = true;
-    detailPanel.style.height = "";
-    detailPanel.removeEventListener("transitionend", handleCloseEnd);
-  };
-
-  detailPanel.addEventListener("transitionend", handleCloseEnd);
 }
 
 function createRouteStop(stop, index) {
@@ -186,48 +128,52 @@ function createRouteStop(stop, index) {
   const detailPanel = document.createElement("div");
   detailPanel.className = "detail-panel";
   detailPanel.id = `detail-panel-${index}`;
-  detailPanel.hidden = true;
-  detailPanel.classList.add("is-collapsed");
   detailPanel.innerHTML = `
-    <div class="detail-grid">
-      <article>
-        <span>Approx. Arrival</span>
-        <strong>${stop.arrival}</strong>
-        <p>${stop.connector}</p>
-      </article>
-      <article>
-        <span>Time To Be Spent</span>
-        <strong>${stop.stay}</strong>
-        <p>${stop.detail}</p>
-      </article>
-      <article>
-        <span>Approx. Departure</span>
-        <strong>${stop.departure}</strong>
-        <p>${stop.teaser}</p>
-      </article>
+    <div class="detail-panel-inner">
+      <div class="detail-grid">
+        <article>
+          <span>Approx. Arrival</span>
+          <strong>${stop.arrival}</strong>
+          <p>${stop.connector}</p>
+        </article>
+        <article>
+          <span>Time To Be Spent</span>
+          <strong>${stop.stay}</strong>
+          <p>${stop.detail}</p>
+        </article>
+        <article>
+          <span>Approx. Departure</span>
+          <strong>${stop.departure}</strong>
+          <p>${stop.teaser}</p>
+        </article>
+      </div>
     </div>
   `;
-
-  button.addEventListener("click", () => {
-    const shouldOpen = !card.classList.contains("is-open");
-
-    if (shouldOpen && mobileRouteAccordion.matches && routeStopsContainer) {
-      routeStopsContainer.querySelectorAll(".stop-card.is-open").forEach((openCard) => {
-        if (openCard !== card) {
-          closeRouteCard(openCard);
-        }
-      });
-    }
-
-    const isOpen = card.classList.toggle("is-open", shouldOpen);
-    button.setAttribute("aria-expanded", String(isOpen));
-    setPanelOpenState(detailPanel, isOpen);
-    updatePinButtonText(button, isOpen);
-  });
 
   card.append(button, detailPanel);
   row.appendChild(card);
   return row;
+}
+
+function toggleRouteCard(button) {
+  const card = button.closest(".stop-card");
+
+  if (!card) {
+    return;
+  }
+
+  const shouldOpen = !card.classList.contains("is-open");
+
+  if (shouldOpen && mobileRouteAccordion.matches && routeStopsContainer) {
+    const openCard = routeStopsContainer.querySelector(".stop-card.is-open");
+    if (openCard && openCard !== card) {
+      closeRouteCard(openCard);
+    }
+  }
+
+  const isOpen = card.classList.toggle("is-open", shouldOpen);
+  button.setAttribute("aria-expanded", String(isOpen));
+  updatePinButtonText(button, isOpen);
 }
 
 function renderRouteStops() {
@@ -236,9 +182,25 @@ function renderRouteStops() {
   }
 
   routeStopsContainer.innerHTML = "";
+  const fragment = document.createDocumentFragment();
+
   routeStops.forEach((stop, index) => {
-    routeStopsContainer.appendChild(createRouteStop(stop, index));
+    fragment.appendChild(createRouteStop(stop, index));
   });
+
+  routeStopsContainer.appendChild(fragment);
 }
 
 renderRouteStops();
+
+if (routeStopsContainer) {
+  routeStopsContainer.addEventListener("click", (event) => {
+    const button = event.target.closest(".pin-button");
+
+    if (!button) {
+      return;
+    }
+
+    toggleRouteCard(button);
+  });
+}
