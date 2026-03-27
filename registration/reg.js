@@ -130,6 +130,16 @@ const showPopup = (title, message) => {
 // Wait for DOM to load
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector("form");
+  const submitButton = form.querySelector(".submit-button");
+  const defaultSubmitLabel = submitButton.textContent.trim();
+
+  const setSubmitLoading = (isLoading) => {
+    submitButton.disabled = isLoading;
+    submitButton.classList.toggle("is-loading", isLoading);
+    submitButton.textContent = isLoading
+      ? "Submitting registration..."
+      : defaultSubmitLabel;
+  };
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -172,6 +182,8 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     try {
+      setSubmitLoading(true);
+
       await fetch(scriptURL, {
         method: "POST",
         mode: "no-cors", // required for Google Apps Script
@@ -189,6 +201,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "We could not submit your registration right now. Please try again in a moment.",
       );
       console.error(error);
+    } finally {
+      setSubmitLoading(false);
     }
   });
 });
