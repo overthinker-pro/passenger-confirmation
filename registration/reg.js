@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       showPopup(
         "Registration sent",
-        "Your family registration was submitted successfully. We will use these details to plan the tour.",
+        "Your registration has been submitted successfully. Thank you for registering!",
       );
       form.reset();
     } catch (error) {
