@@ -182,6 +182,84 @@ button {
   max-width: 36rem;
 }
 
+.deadline-card {
+  width: 100%;
+  margin-top: 1.35rem;
+  padding: 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(23, 54, 91, 0.09);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.82), rgba(232, 244, 255, 0.88));
+  box-shadow: var(--shadow-md);
+}
+
+.deadline-label {
+  margin: 0;
+  color: #2f7de1;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.deadline-card h2 {
+  margin: 0.45rem 0 0;
+  font-size: clamp(1.25rem, 3.4vw, 1.55rem);
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+.deadline-note {
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.deadline-timer {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.time-box {
+  padding: 12px 10px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(23, 54, 91, 0.08);
+  box-shadow: 0 10px 20px rgba(20, 55, 98, 0.06);
+}
+
+.time-value,
+.time-label {
+  display: block;
+}
+
+.time-value {
+  color: var(--navy-900);
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.time-label {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.deadline-card.is-expired {
+  background:
+    linear-gradient(135deg, rgba(255, 245, 238, 0.9), rgba(255, 250, 247, 0.96));
+}
+
+.deadline-card.is-expired .deadline-label {
+  color: #c86b45;
+}
+
 .registration-form {
   margin-top: 26px;
 }
@@ -329,5 +407,9 @@ input[type="text"]:focus {
   .form-section {
     padding: 16px;
     border-radius: 18px;
+  }
+
+  .deadline-timer {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

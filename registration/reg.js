@@ -127,8 +127,69 @@ const showPopup = (title, message) => {
   popup.classList.add("is-visible");
 };
 
+const startDeadlineTimer = () => {
+  const deadlineCard = document.querySelector(".deadline-card");
+
+  if (!deadlineCard) {
+    return;
+  }
+
+  const deadlineText = deadlineCard.querySelector(".deadline-note");
+  const values = {
+    days: deadlineCard.querySelector('[data-unit="days"]'),
+    hours: deadlineCard.querySelector('[data-unit="hours"]'),
+    minutes: deadlineCard.querySelector('[data-unit="minutes"]'),
+    seconds: deadlineCard.querySelector('[data-unit="seconds"]'),
+  };
+
+  const deadline = new Date(deadlineCard.dataset.deadline);
+
+  if (Number.isNaN(deadline.getTime())) {
+    return;
+  }
+
+  const formatNumber = (value) => String(value).padStart(2, "0");
+
+  const updateTimer = () => {
+    const now = new Date();
+    const difference = deadline.getTime() - now.getTime();
+
+    if (difference <= 0) {
+      deadlineCard.classList.add("is-expired");
+      values.days.textContent = "00";
+      values.hours.textContent = "00";
+      values.minutes.textContent = "00";
+      values.seconds.textContent = "00";
+
+      if (deadlineText) {
+        deadlineText.textContent =
+          "The registration deadline has passed.";
+      }
+
+      clearInterval(timerId);
+      return;
+    }
+
+    const totalSeconds = Math.floor(difference / 1000);
+    const days = Math.floor(totalSeconds / 86400);
+    const hours = Math.floor((totalSeconds % 86400) / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    values.days.textContent = formatNumber(days);
+    values.hours.textContent = formatNumber(hours);
+    values.minutes.textContent = formatNumber(minutes);
+    values.seconds.textContent = formatNumber(seconds);
+  };
+
+  updateTimer();
+  const timerId = setInterval(updateTimer, 1000);
+};
+
 // Wait for DOM to load
 document.addEventListener("DOMContentLoaded", () => {
+  startDeadlineTimer();
+
   const form = document.querySelector("form");
   const submitButton = form.querySelector(".submit-button");
   const defaultSubmitLabel = submitButton.textContent.trim();
