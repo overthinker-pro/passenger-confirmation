@@ -410,6 +410,10 @@ button:focus-visible {
   font-size: 0.9rem;
 }
 
+body.is-standalone .install-panel {
+  display: none;
+}
+
 .route-board::before {
   content: "";
   position: absolute;
@@ -834,6 +838,12 @@ button:focus-visible {
 
   .detail-panel {
     transition: none;
+  }
+}
+
+@media (display-mode: standalone) {
+  .install-panel {
+    display: none;
   }
 }
 

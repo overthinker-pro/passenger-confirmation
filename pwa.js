@@ -10,6 +10,11 @@ const isStandaloneMode =
   window.matchMedia("(display-mode: standalone)").matches ||
   window.navigator.standalone === true;
 
+if (isStandaloneMode) {
+  document.documentElement.classList.add("is-standalone");
+  document.body.classList.add("is-standalone");
+}
+
 const buildFloatingInstallButton = () => {
   if (document.querySelector(".pwa-install-button") || isStandaloneMode) {
     return;
