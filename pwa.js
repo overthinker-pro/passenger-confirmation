@@ -109,8 +109,7 @@ const injectInstallUi = () => {
 
 const showInstallButton = () => {
   const button = document.querySelector(".pwa-install-button");
-
-  if (button && deferredInstallPrompt && !isStandaloneMode) {
+  if (button && deferredInstallPrompt) {
     button.classList.add("is-visible");
   }
 };
