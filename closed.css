@@ -100,7 +100,8 @@ button:focus-visible {
 }
 
 .route-board,
-.hero-stage {
+.hero-stage,
+.install-panel {
   scroll-margin-top: 1.25rem;
 }
 
@@ -114,13 +115,15 @@ button:focus-visible {
 }
 
 .hero-stage,
-.route-board {
+.route-board,
+.install-panel {
   position: relative;
   z-index: 1;
 }
 
 .hero-stage,
-.route-board {
+.route-board,
+.install-panel {
   border: 1px solid rgba(255, 255, 255, 0.34);
   border-radius: var(--radius-xl);
   box-shadow: var(--shadow-lg);
@@ -151,7 +154,8 @@ button:focus-visible {
 }
 
 .hero-copy-block,
-.route-board > * {
+.route-board > *,
+.install-panel > * {
   position: relative;
   z-index: 1;
 }
@@ -207,7 +211,7 @@ button:focus-visible {
 .hero-stage h1 {
   margin-top: 1rem;
   max-width: 11ch;
-  font-size: clamp(3rem, 8vw, 5.9rem);
+  font-size: clamp(2.6rem, 7vw, 5.1rem);
   line-height: 0.9;
   letter-spacing: 0.001em;
   text-align: center;
@@ -299,6 +303,111 @@ button:focus-visible {
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.1);
   font-size: 0.82rem;
+}
+
+.install-panel {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.25rem;
+  color: #fff8ef;
+  background:
+    radial-gradient(circle at 18% 20%, rgba(127, 240, 216, 0.12), transparent 16rem),
+    linear-gradient(135deg, rgba(12, 31, 58, 0.92) 0%, rgba(18, 49, 88, 0.92) 50%, rgba(28, 77, 110, 0.88) 100%);
+}
+
+.install-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 34%),
+    repeating-linear-gradient(120deg, rgba(255, 255, 255, 0.04) 0 1px, transparent 1px 22px);
+}
+
+.install-copy h2 {
+  margin-top: 0.7rem;
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  line-height: 1.02;
+  color: #fff8ef;
+  text-wrap: balance;
+}
+
+.install-note {
+  margin-top: 0.85rem;
+  max-width: 38rem;
+  line-height: 1.75;
+  color: rgba(255, 248, 239, 0.82);
+}
+
+.install-action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 0.85rem;
+}
+
+.pwa-install-button-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.95rem 1.22rem;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7ff0d8, #33c7c5);
+  color: #103a51;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  box-shadow: 0 18px 30px rgba(42, 156, 160, 0.24);
+  cursor: pointer;
+  transition:
+    transform var(--dur-fast) var(--ease-smooth),
+    box-shadow var(--dur-fast) var(--ease-soft),
+    filter var(--dur-fast) var(--ease-soft);
+}
+
+.pwa-install-button-inline:hover,
+.pwa-install-button-inline:focus-visible {
+  transform: translateY(-0.16rem);
+  box-shadow: 0 22px 34px rgba(42, 156, 160, 0.3);
+  filter: saturate(1.06);
+  outline: none;
+}
+
+.pwa-install-button-inline.is-disabled {
+  background: linear-gradient(
+    135deg,
+    rgba(159, 211, 255, 0.42),
+    rgba(127, 240, 216, 0.38)
+  );
+  color: rgba(16, 58, 81, 0.8);
+  box-shadow: none;
+}
+
+.pwa-install-button-inline.is-disabled:hover,
+.pwa-install-button-inline.is-disabled:focus-visible {
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+.pwa-install-button-inline .pwa-install-button__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #103a51;
+  box-shadow: 0 0 0 0 rgba(16, 58, 81, 0.35);
+  animation: hero-button-dot 1.8s ease-out infinite;
+}
+
+.install-helper {
+  max-width: 20rem;
+  color: rgba(255, 248, 239, 0.74);
+  line-height: 1.6;
+  font-size: 0.9rem;
 }
 
 .route-board::before {
@@ -611,6 +720,23 @@ button:focus-visible {
 }
 
 @media (max-width: 759px) {
+  .install-panel {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .install-copy {
+    justify-items: center;
+  }
+
+  .install-action {
+    align-items: center;
+  }
+
+  .install-helper {
+    text-align: center;
+  }
+
   .route-spine {
     left: 1.2rem;
     transform: none;
@@ -649,6 +775,19 @@ button:focus-visible {
 
   .hero-stage {
     padding: 1.6rem;
+  }
+
+  .install-panel {
+    grid-template-columns: minmax(0, 1.05fr) auto;
+    padding: 1.35rem 1.5rem;
+  }
+
+  .install-action {
+    align-items: flex-end;
+  }
+
+  .install-helper {
+    text-align: right;
   }
 
   .detail-grid {

@@ -10,7 +10,7 @@ const isStandaloneMode =
   window.matchMedia("(display-mode: standalone)").matches ||
   window.navigator.standalone === true;
 
-const injectInstallUi = () => {
+const buildFloatingInstallButton = () => {
   if (document.querySelector(".pwa-install-button") || isStandaloneMode) {
     return;
   }
@@ -22,7 +22,7 @@ const injectInstallUi = () => {
       right: 18px;
       bottom: 18px;
       z-index: 1200;
-      display: none;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
       padding: 12px 16px;
@@ -36,14 +36,22 @@ const injectInstallUi = () => {
       transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
     }
 
-    .pwa-install-button.is-visible {
-      display: inline-flex;
-    }
-
     .pwa-install-button:hover {
       transform: translateY(-2px);
       box-shadow: 0 22px 34px rgba(20, 55, 98, 0.3);
       filter: brightness(1.03);
+    }
+
+    .pwa-install-button.is-disabled {
+      opacity: 0.84;
+      box-shadow: none;
+      cursor: default;
+    }
+
+    .pwa-install-button.is-disabled:hover {
+      transform: none;
+      filter: none;
+      box-shadow: none;
     }
 
     .pwa-install-button__dot {
@@ -88,29 +96,57 @@ const injectInstallUi = () => {
     <span>Install App</span>
   `;
 
-  button.addEventListener("click", async () => {
-    if (!deferredInstallPrompt) {
-      return;
-    }
-
-    deferredInstallPrompt.prompt();
-    const choiceResult = await deferredInstallPrompt.userChoice;
-
-    if (choiceResult.outcome === "accepted") {
-      button.classList.remove("is-visible");
-    }
-
-    deferredInstallPrompt = null;
-  });
-
   document.head.appendChild(style);
   document.body.appendChild(button);
 };
 
-const showInstallButton = () => {
+const ensureInstallUi = () => {
+  if (!document.querySelector(".pwa-install-button")) {
+    buildFloatingInstallButton();
+  }
+};
+
+const updateInstallUi = () => {
   const button = document.querySelector(".pwa-install-button");
-  if (button && deferredInstallPrompt) {
-    button.classList.add("is-visible");
+  const helper = document.querySelector(".install-helper");
+
+  if (!button) {
+    return;
+  }
+
+  const label = button.querySelector("span:last-child");
+
+  if (isStandaloneMode) {
+    button.classList.add("is-disabled");
+    if (label) {
+      label.textContent = "App Installed";
+    }
+    if (helper) {
+      helper.textContent =
+        "Bethany Tour is already available in app mode on this device.";
+    }
+    return;
+  }
+
+  if (deferredInstallPrompt) {
+    button.classList.remove("is-disabled");
+    if (label) {
+      label.textContent = "Install App";
+    }
+    if (helper) {
+      helper.textContent =
+        "Tap install to add Bethany Tour to your home screen or desktop.";
+    }
+    return;
+  }
+
+  button.classList.add("is-disabled");
+  if (label) {
+    label.textContent = "Install Unavailable";
+  }
+  if (helper) {
+    helper.textContent =
+      "Install works only in supported browsers and usually needs HTTPS or a local server.";
   }
 };
 
@@ -125,17 +161,43 @@ if ("serviceWorker" in navigator) {
 window.addEventListener("beforeinstallprompt", (event) => {
   event.preventDefault();
   deferredInstallPrompt = event;
-  injectInstallUi();
-  showInstallButton();
+  ensureInstallUi();
+  updateInstallUi();
 });
 
 window.addEventListener("appinstalled", () => {
   deferredInstallPrompt = null;
-  document.querySelector(".pwa-install-button")?.classList.remove("is-visible");
+  updateInstallUi();
+});
+
+document.addEventListener("click", async (event) => {
+  const button = event.target.closest(".pwa-install-button");
+
+  if (!button) {
+    return;
+  }
+
+  if (!deferredInstallPrompt) {
+    updateInstallUi();
+    return;
+  }
+
+  deferredInstallPrompt.prompt();
+  await deferredInstallPrompt.userChoice;
+  deferredInstallPrompt = null;
+  updateInstallUi();
 });
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", injectInstallUi, { once: true });
+  document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+      ensureInstallUi();
+      updateInstallUi();
+    },
+    { once: true },
+  );
 } else {
-  injectInstallUi();
+  ensureInstallUi();
+  updateInstallUi();
 }
