@@ -3,94 +3,49 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bethany Tour 2026 | Coastal Heritage Trail</title>
+    <title>Bethany Tour 2026</title>
     <meta
       name="description"
-      content="Let's go on a tour! Join us for the Bethany Tour 2026, an immersive experience along the Coastal Heritage Trail. Explore heritage spaces, enjoy food breaks, and soak in the beach vibes. Register now to secure your spot on this unforgettable journey!"
+      content="Bethany Tour 2026 registration summary."
     />
-    <meta name="theme-color" content="#16365c" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="Bethany Tour" />
-    <link rel="manifest" href="manifest.webmanifest" />
-    <link rel="icon" href="assets/app-icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="assets/app-icon.svg" />
     <link rel="stylesheet" href="closed.css" />
   </head>
   <body>
-    <main class="experience-page">
-      <section class="hero-stage">
-        <div class="hero-copy-block">
-          <p class="eyebrow">Bethany Tour 2026 / Winning Route</p>
-          <span class="hero-chip">Coastal Heritage Trail</span>
-          <h1>Bethany Sunday School Tour 2026</h1>
-          <p class="hero-lead">
-            A playful, interactive route experience built around prayer stops,
-            heritage spaces, food breaks, beach time, and the full-day rhythm
-            of the final plan.
-          </p>
-
-          <span class="hero-button hero-button-closed" aria-disabled="true">
-            <span class="hero-button-badge">Slots Full</span>
-            <span class="hero-button-label">Registration Closed</span>
-          </span>
-
-          <div class="hero-chip-row" aria-label="Tour summary">
-            <span>Start: 5:30 AM</span>
-            <span>Return: ~11:45 PM</span>
-            <span>8 route moments</span>
-            <span>Heritage + coast + meals</span>
-          </div>
-        </div>
+    <main class="single-page" data-adults="15" data-students="11">
+      <section class="hero-card" aria-labelledby="tour-title">
+        <p class="eyebrow">Bethany Tour 2026</p>
+        <h1 id="tour-title">Bethany Sunday School Tour 2026</h1>
+        <p class="trail-name">Coastal Heritage Trail</p>
       </section>
 
-      <section class="install-panel" aria-labelledby="install-title">
-        <div class="install-copy">
-          <p class="eyebrow eyebrow-light">App Access</p>
-          <h2 id="install-title">Install Bethany Tour App on your phone</h2>
-          <p class="install-note">
-            Add the tour as an app so updates, registration, instructions, and
-            route details are easier to open without searching for the browser
-            link every time.
-          </p>
-        </div>
-        <div class="install-action">
-          <button
-            type="button"
-            class="pwa-install-button pwa-install-button-inline"
-            aria-label="Install Bethany Tour app"
-          >
-            <span class="pwa-install-button__dot" aria-hidden="true"></span>
-            <span>Install App</span>
-          </button>
-          <p class="install-helper" id="install-helper">
-            Open this site in a supported browser to install it like an app.
-          </p>
-        </div>
-      </section>
-
-      <section class="route-board" id="route-board" aria-labelledby="route-title">
-        <div class="section-head">
-          <div>
-            <p class="eyebrow eyebrow-dark">Route Board</p>
-            <h2 id="route-title">The route now feels like a live tour board</h2>
-          </div>
-          <p class="section-note route-note">
-            Tap any location pin in the route to open arrival time, time to be
-            spent, and departure details.
+      <section class="count-card" aria-labelledby="count-title">
+        <div class="section-copy">
+          <p class="eyebrow eyebrow-soft">Registration Count</p>
+          <h2 id="count-title">Current registered members</h2>
+          <p class="status-text" id="status-text" aria-live="polite">
+            Loading registration count...
           </p>
         </div>
 
-        <div class="route-layout">
-          <div class="s-route" id="s-route">
-            <div class="route-spine" aria-hidden="true"></div>
-            <div class="route-dots" aria-hidden="true"></div>
-            <div class="route-stops" id="route-stops"></div>
-          </div>
+        <div class="count-grid" aria-label="Registration counts">
+          <article class="count-item">
+            <span class="count-label">Adults</span>
+            <strong class="count-value" id="adult-count">0</strong>
+          </article>
+
+          <article class="count-item">
+            <span class="count-label">Students</span>
+            <strong class="count-value" id="student-count">0</strong>
+          </article>
+
+          <article class="count-item count-item-total">
+            <span class="count-label">Total</span>
+            <strong class="count-value" id="total-count">0</strong>
+          </article>
         </div>
       </section>
     </main>
 
     <script src="closed.js"></script>
-    <script src="pwa.js" data-sw="service-worker.js"></script>
   </body>
 </html>
