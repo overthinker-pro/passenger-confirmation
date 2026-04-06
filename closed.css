@@ -851,10 +851,6 @@ body.is-standalone .install-panel {
   .stop-card {
     animation: rise-in 680ms ease both;
   }
-
-  .route-spine {
-    animation: spine-flow 4.8s linear infinite;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -924,15 +920,5 @@ body.is-standalone .install-panel {
 
   100% {
     box-shadow: 0 0 0 0 rgba(255, 248, 239, 0);
-  }
-}
-
-@keyframes spine-flow {
-  from {
-    background-position: 0 0;
-  }
-
-  to {
-    background-position: 0 10rem;
   }
 }
