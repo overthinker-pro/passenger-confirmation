@@ -1,5 +1,6 @@
 const scriptURL =
   "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
+const registrationsClosed = true;
 
 const ensurePopup = () => {
   let popup = document.querySelector(".confirmation-popup");
@@ -128,6 +129,10 @@ const showPopup = (title, message) => {
 };
 
 const startDeadlineTimer = () => {
+  if (registrationsClosed) {
+    return;
+  }
+
   const deadlineCard = document.querySelector(".deadline-card");
 
   if (!deadlineCard) {
@@ -191,6 +196,17 @@ document.addEventListener("DOMContentLoaded", () => {
   startDeadlineTimer();
 
   const form = document.querySelector("form");
+  if (registrationsClosed) {
+    form?.addEventListener("submit", (event) => {
+      event.preventDefault();
+      showPopup(
+        "Registration closed",
+        "Registrations are closed because all available bus seats have been filled.",
+      );
+    });
+    return;
+  }
+
   const submitButton = form.querySelector(".submit-button");
   const defaultSubmitLabel = submitButton.textContent.trim();
 

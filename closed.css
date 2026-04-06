@@ -269,6 +269,32 @@ button:focus-visible {
   outline: none;
 }
 
+.hero-button-closed {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.1));
+  color: #fff8ef;
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: none;
+  animation: none;
+  cursor: default;
+}
+
+.hero-button-closed:hover,
+.hero-button-closed:focus-visible {
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+.hero-button-closed .hero-button-badge {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff8ef;
+}
+
+.hero-button-closed .hero-button-badge::before {
+  background: #ffbf61;
+  box-shadow: 0 0 0 0 rgba(255, 191, 97, 0.35);
+}
+
 .hero-button-badge {
   position: relative;
   display: inline-flex;

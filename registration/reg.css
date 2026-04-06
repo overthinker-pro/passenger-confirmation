@@ -182,7 +182,8 @@ button {
   max-width: 36rem;
 }
 
-.deadline-card {
+.deadline-card,
+.closed-card {
   width: 100%;
   margin-top: 1.35rem;
   padding: 18px;
@@ -193,7 +194,8 @@ button {
   box-shadow: var(--shadow-md);
 }
 
-.deadline-label {
+.deadline-label,
+.closed-label {
   margin: 0;
   color: #2f7de1;
   font-size: 0.76rem;
@@ -202,17 +204,28 @@ button {
   text-transform: uppercase;
 }
 
-.deadline-card h2 {
+.deadline-card h2,
+.closed-card h2 {
   margin: 0.45rem 0 0;
   font-size: clamp(1.25rem, 3.4vw, 1.55rem);
   line-height: 1.15;
   color: var(--ink);
 }
 
-.deadline-note {
+.deadline-note,
+.closed-note {
   margin: 0.55rem 0 0;
   color: var(--muted);
   line-height: 1.65;
+}
+
+.closed-card {
+  background:
+    linear-gradient(135deg, rgba(255, 246, 239, 0.92), rgba(255, 251, 247, 0.98));
+}
+
+.closed-label {
+  color: #c86b45;
 }
 
 .deadline-timer {
@@ -264,6 +277,10 @@ button {
   margin-top: 26px;
 }
 
+.registration-form-closed {
+  opacity: 0.7;
+}
+
 .form-section {
   position: relative;
   padding: 18px 18px 20px;
@@ -307,6 +324,19 @@ input[type="text"] {
 
 input[type="text"]::placeholder {
   color: #7b8aa0;
+}
+
+input[type="text"]:disabled,
+.add-button:disabled,
+.submit-button:disabled {
+  cursor: not-allowed;
+}
+
+input[type="text"]:disabled {
+  background: rgba(244, 246, 249, 0.9);
+  color: #7b8aa0;
+  border-color: rgba(23, 54, 91, 0.1);
+  box-shadow: none;
 }
 
 input[type="text"]:focus {
@@ -353,6 +383,11 @@ input[type="text"]:focus {
   box-shadow: 0 16px 28px rgba(88, 161, 106, 0.22);
 }
 
+.submit-button-closed {
+  background: linear-gradient(135deg, #8a97aa, #a8b1bf);
+  box-shadow: none;
+}
+
 .submit-button.is-loading {
   display: inline-flex;
   align-items: center;
@@ -385,6 +420,7 @@ input[type="text"]:focus {
 .submit-button:disabled:hover {
   transform: none;
   filter: none;
+  box-shadow: none;
 }
 
 @keyframes button-spin {
