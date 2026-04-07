@@ -47,7 +47,51 @@
           </article>
         </div>
       </section>
+
+      <footer class="page-footer">
+        <button type="button" class="admin-access" id="admin-access">
+          Member Access
+        </button>
+      </footer>
     </main>
+
+    <div class="auth-modal" id="auth-modal" hidden>
+      <div class="auth-modal__backdrop" data-close-auth="true"></div>
+      <div
+        class="auth-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-title"
+      >
+        <button
+          type="button"
+          class="auth-modal__close"
+          id="auth-close"
+          aria-label="Close member access"
+        >
+          x
+        </button>
+        <p class="eyebrow eyebrow-soft">Admin Access</p>
+        <h2 id="auth-title">Sign in to continue</h2>
+        <form class="auth-form" id="auth-form">
+          <label class="auth-label" for="auth-id">ID</label>
+          <input class="auth-input" id="auth-id" name="auth-id" type="text" required />
+
+          <label class="auth-label" for="auth-password">Password</label>
+          <input
+            class="auth-input"
+            id="auth-password"
+            name="auth-password"
+            type="password"
+            required
+          />
+
+          <p class="auth-error" id="auth-error" aria-live="polite"></p>
+
+          <button type="submit" class="auth-submit">Open Member List</button>
+        </form>
+      </div>
+    </div>
 
     <script src="closed.js"></script>
   </body>

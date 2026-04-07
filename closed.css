@@ -208,6 +208,128 @@ body {
   line-height: 1;
 }
 
+.page-footer {
+  display: flex;
+  justify-content: center;
+  padding-top: 2px;
+}
+
+.admin-access {
+  border: none;
+  background: transparent;
+  color: rgba(93, 104, 119, 0.72);
+  font: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: color 0.2s ease, opacity 0.2s ease;
+  opacity: 0.7;
+}
+
+.admin-access:hover,
+.admin-access:focus-visible {
+  color: var(--muted);
+  opacity: 1;
+  outline: none;
+}
+
+.auth-modal[hidden] {
+  display: none;
+}
+
+.auth-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+
+.auth-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(25, 35, 48, 0.42);
+  backdrop-filter: blur(4px);
+}
+
+.auth-modal__dialog {
+  position: relative;
+  width: min(100%, 420px);
+  padding: 24px 22px 22px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-xl);
+  background: rgba(255, 252, 247, 0.98);
+  box-shadow: 0 28px 60px rgba(24, 34, 46, 0.18);
+}
+
+.auth-modal__close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(30, 43, 58, 0.06);
+  color: var(--ink);
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.auth-modal__dialog h2 {
+  margin: 14px 0 0;
+  font-size: clamp(1.45rem, 4vw, 1.9rem);
+}
+
+.auth-form {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.auth-label {
+  color: var(--muted);
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.auth-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 0 14px;
+  border: 1px solid rgba(30, 43, 58, 0.14);
+  border-radius: 14px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: rgba(28, 107, 111, 0.42);
+  box-shadow: 0 0 0 4px rgba(28, 107, 111, 0.1);
+}
+
+.auth-error {
+  min-height: 1.3rem;
+  margin: 2px 0 0;
+  color: #b84c4c;
+  font-size: 0.88rem;
+}
+
+.auth-submit {
+  min-height: 48px;
+  margin-top: 2px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--accent), #2d8985);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 @media (min-width: 640px) {
   .count-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));

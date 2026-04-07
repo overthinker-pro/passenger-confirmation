@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrants | Bethany Tour 2026</title>
+    <meta
+      name="description"
+      content="Fetch and view Bethany Tour registrants from Google Sheets."
+    />
+    <link rel="stylesheet" href="registrants.css" />
+  </head>
+  <body>
+    <main class="registrants-page">
+      <section class="welcome-hero" aria-labelledby="fetch-title">
+        <div class="welcome-hero__copy">
+          <p class="welcome-kicker">Bethany Tour 2026</p>
+          <h1>Registered Members</h1>
+          <p class="welcome-lead">
+            View the final list of registered adults and students for the tour in
+            one place.
+          </p>
+        </div>
+
+        <div class="welcome-hero__action">
+          <form class="fetch-form" id="fetch-form">
+            <button type="submit" class="fetch-button" id="fetch-button">
+              <span
+                class="fetch-button__spinner"
+                id="fetch-spinner"
+                aria-hidden="true"
+              ></span>
+              <span class="fetch-button__label">Load Registered Names</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="lists-grid" aria-label="Registrant lists">
+        <article class="list-card">
+          <div class="list-card__head">
+            <div>
+              <p class="panel-label">Adults</p>
+              <h2>Registered Adults</h2>
+            </div>
+            <span class="list-count" id="adult-total">0</span>
+          </div>
+          <ol class="name-list" id="adult-list">
+            <li class="empty-state">No adult names loaded yet.</li>
+          </ol>
+        </article>
+
+        <article class="list-card">
+          <div class="list-card__head">
+            <div>
+              <p class="panel-label">Students</p>
+              <h2>Registered Students</h2>
+            </div>
+            <span class="list-count" id="student-total">0</span>
+          </div>
+          <ol class="name-list" id="student-list">
+            <li class="empty-state">No student names loaded yet.</li>
+          </ol>
+        </article>
+      </section>
+    </main>
+
+    <script src="registrants.js"></script>
+  </body>
+</html>
