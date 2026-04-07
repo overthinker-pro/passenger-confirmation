@@ -34,7 +34,7 @@ function loadCounts() {
     updateCounts(safeAdults, safeStudents);
 
     if (statusTextElement) {
-      statusTextElement.textContent = "Current registration count loaded.";
+      statusTextElement.textContent = `Total number of registrations:`;
     }
   }, 850);
 }
