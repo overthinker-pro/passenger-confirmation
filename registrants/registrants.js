@@ -12,7 +12,7 @@ const dateWednesdayTotal = document.getElementById("date-wednesday-total");
 const dateThursdayTotal = document.getElementById("date-thursday-total");
 const dateFridayTotal = document.getElementById("date-friday-total");
 const REGISTRANTS_URL =
-  "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
+  "https://script.google.com/macros/s/AKfycby-Ce9VosopaqR8WT1fF4w7FL5sNOZGACp0WYETihAfYE3pss4ZAIjv9VIMo8eIuLWU/exec";
 
 function setStatus(message, tone = "") {
   if (!fetchStatus) {
