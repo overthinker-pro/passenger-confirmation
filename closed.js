@@ -17,7 +17,7 @@ const pollSubmitLabel = pollSubmitButton?.querySelector(".poll-submit__label");
 const ADMIN_ID = "NOEL";
 const ADMIN_PASSWORD = "BETH2026";
 const DATES_URL =
-  "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
+  "https://script.google.com/macros/s/AKfycby-Ce9VosopaqR8WT1fF4w7FL5sNOZGACp0WYETihAfYE3pss4ZAIjv9VIMo8eIuLWU/exec";
 
 /**
  * Sends poll data to Apps Script using no-cors mode with a JSON body.
