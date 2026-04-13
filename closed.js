@@ -20,24 +20,21 @@ const DATES_URL =
   "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
 
 /**
- * Sends poll data to Apps Script using no-cors mode.
+ * Sends poll data to Apps Script using no-cors mode with a JSON body.
  * @param {{sheetName: string, timeStamp: string, selectedDate: string, deviceID: string}} payload
  * @returns {Promise<void>}
  */
 async function submitDatePreference(payload) {
-  const requestBody = new URLSearchParams(payload).toString();
-  
+  const requestBody = JSON.stringify(payload);
+
   await fetch(DATES_URL, {
     method: "POST",
     mode: "no-cors",
     headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
+      "Content-Type": "text/plain;charset=utf-8",
     },
     body: requestBody,
-    
-    
   });
-  
 }
 
 function updateCounts(adults, students) {
