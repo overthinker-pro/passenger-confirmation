@@ -243,6 +243,17 @@ function parseRegistrants(payload) {
 }
 
 function parseDateRows(payload) {
+  if (payload && typeof payload === "object") {
+    const looksLikeRegistrantPayload =
+      Array.isArray(payload.adults) || Array.isArray(payload.students);
+
+    if (looksLikeRegistrantPayload) {
+      throw new Error(
+        "The Apps Script is still returning the registrant list. Update doGet() to handle sheetName=Date.",
+      );
+    }
+  }
+
   const rows = extractArrayPayload(payload);
 
   if (!rows.length) {
