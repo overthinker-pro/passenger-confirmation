@@ -55,7 +55,8 @@ body::before {
 }
 
 .welcome-hero,
-.list-card {
+.list-card,
+.date-panel {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -191,6 +192,78 @@ body::before {
   padding: 22px;
 }
 
+.date-panel {
+  display: grid;
+  gap: 18px;
+  border-radius: var(--radius-lg);
+  padding: 22px;
+}
+
+.date-panel__head {
+  display: grid;
+  gap: 16px;
+  align-items: end;
+}
+
+.date-panel__lead {
+  margin: 14px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.fetch-button--secondary {
+  border-color: rgba(97, 232, 255, 0.24);
+  background: linear-gradient(135deg, rgba(97, 232, 255, 0.92), rgba(119, 241, 203, 0.86));
+}
+
+.date-summary-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.date-summary-card {
+  padding: 18px;
+  border: 1px solid rgba(151, 243, 255, 0.1);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.01);
+}
+
+.date-summary-card__label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.date-summary-card__value {
+  display: block;
+  margin-top: 10px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1;
+  color: var(--cyan);
+}
+
+.date-entries {
+  display: grid;
+  gap: 14px;
+}
+
+.date-entries__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.date-entries__head h3 {
+  margin: 0;
+  font-size: clamp(1.2rem, 3vw, 1.6rem);
+}
+
 .list-card__head {
   display: flex;
   align-items: flex-start;
@@ -276,6 +349,14 @@ body::before {
   .lists-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .date-panel__head {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .date-summary-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 759px) {
@@ -285,7 +366,8 @@ body::before {
   }
 
   .welcome-hero,
-  .list-card {
+  .list-card,
+  .date-panel {
     padding-left: 18px;
     padding-right: 18px;
   }

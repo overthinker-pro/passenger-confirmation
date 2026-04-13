@@ -63,6 +63,56 @@
           </ol>
         </article>
       </section>
+
+      <section class="date-panel" aria-labelledby="date-fetch-title">
+        <div class="date-panel__head">
+          <div>
+            <p class="panel-label">Date Poll</p>
+            <h2 id="date-fetch-title">Tour Date Preferences</h2>
+            <p class="date-panel__lead">
+              Load the submitted date opinions and see which day people are leaning toward.
+            </p>
+          </div>
+
+          <form class="fetch-form" id="date-fetch-form">
+            <button type="submit" class="fetch-button fetch-button--secondary" id="date-fetch-button">
+              <span
+                class="fetch-button__spinner"
+                id="date-fetch-spinner"
+                aria-hidden="true"
+              ></span>
+              <span class="fetch-button__label">Load Date Preferences</span>
+            </button>
+          </form>
+        </div>
+
+        <p class="fetch-status" id="date-fetch-status" aria-live="polite"></p>
+
+        <div class="date-summary-grid" aria-label="Date preference totals">
+          <article class="date-summary-card">
+            <span class="date-summary-card__label">May 20th Wednesday</span>
+            <strong class="date-summary-card__value" id="date-wednesday-total">0</strong>
+          </article>
+          <article class="date-summary-card">
+            <span class="date-summary-card__label">May 21st Thursday</span>
+            <strong class="date-summary-card__value" id="date-thursday-total">0</strong>
+          </article>
+          <article class="date-summary-card">
+            <span class="date-summary-card__label">May 22nd Friday</span>
+            <strong class="date-summary-card__value" id="date-friday-total">0</strong>
+          </article>
+        </div>
+
+        <div class="date-entries">
+          <div class="date-entries__head">
+            <h3>Recent Responses</h3>
+            <span class="list-count" id="date-total">0</span>
+          </div>
+          <ol class="name-list" id="date-list">
+            <li class="empty-state">No date preferences loaded yet.</li>
+          </ol>
+        </div>
+      </section>
     </main>
 
     <script src="registrants.js"></script>

@@ -22,6 +22,39 @@
         </p>
       </section>
 
+      <section class="poll-card" aria-labelledby="date-poll-title">
+        <div class="section-copy">
+          <p class="eyebrow eyebrow-soft">Date Poll</p>
+          <h2 id="date-poll-title">Which tour date feels best for you?</h2>
+          <p class="poll-note">
+            This is a quick opinion poll only. Choose the date that works best for your family.
+          </p>
+        </div>
+
+        <form class="poll-form" id="date-poll-form">
+          <label class="poll-option">
+            <input type="radio" name="selectedDate" value="Wednesday" required />
+            <span>May 20th Wednesday</span>
+          </label>
+
+          <label class="poll-option">
+            <input type="radio" name="selectedDate" value="Thursday" />
+            <span>May 21st Thursday</span>
+          </label>
+
+          <label class="poll-option">
+            <input type="radio" name="selectedDate" value="Friday" />
+            <span>May 22nd Friday</span>
+          </label>
+
+          <button type="submit" class="poll-submit" id="poll-submit">
+            <span class="poll-submit__spinner" aria-hidden="true"></span>
+            <span class="poll-submit__label">Submit Date Preference</span>
+          </button>
+          <p class="poll-status" id="poll-status" aria-live="polite"></p>
+        </form>
+      </section>
+
       <section class="count-card" aria-labelledby="count-title">
         <div class="section-copy">
           <h2 id="count-title">Final Registration Count</h2>
