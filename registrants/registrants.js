@@ -8,8 +8,6 @@ const studentTotal = document.getElementById("student-total");
 const dateFetchForm = document.getElementById("date-fetch-form");
 const dateFetchButton = document.getElementById("date-fetch-button");
 const dateFetchStatus = document.getElementById("date-fetch-status");
-const dateList = document.getElementById("date-list");
-const dateTotal = document.getElementById("date-total");
 const dateWednesdayTotal = document.getElementById("date-wednesday-total");
 const dateThursdayTotal = document.getElementById("date-thursday-total");
 const dateFridayTotal = document.getElementById("date-friday-total");
@@ -127,9 +125,6 @@ function updateDateSummary(rows) {
   }
   if (dateFridayTotal) {
     dateFridayTotal.textContent = String(totals.Friday);
-  }
-  if (dateTotal) {
-    dateTotal.textContent = String(rows.length);
   }
 }
 
@@ -348,31 +343,6 @@ async function fetchDatePreferences(url) {
   return parseDateRows(payload);
 }
 
-function renderDateList(rows) {
-  if (!dateList) {
-    return;
-  }
-
-  if (!rows.length) {
-    dateList.innerHTML = '<li class="empty-state">No date preferences loaded yet.</li>';
-    return;
-  }
-
-  dateList.innerHTML = rows
-    .map((row, index) => {
-      const metaParts = [row.selectedDate];
-      if (row.timeStamp) {
-        metaParts.push(row.timeStamp);
-      }
-      if (row.deviceID) {
-        metaParts.push(row.deviceID);
-      }
-
-      return `<li><span class="name-list__index">${index + 1}.</span>${escapeHtml(metaParts.join(" • "))}</li>`;
-    })
-    .join("");
-}
-
 async function handleFetch(event) {
   event.preventDefault();
 
@@ -404,11 +374,9 @@ async function handleDateFetch(event) {
 
   try {
     const rows = await fetchDatePreferences(REGISTRANTS_URL);
-    renderDateList(rows);
     updateDateSummary(rows);
     setDateStatus("The date preferences are ready to view.", "is-success");
   } catch (error) {
-    renderDateList([]);
     updateDateSummary([]);
     setDateStatus(error.message, "is-error");
   } finally {

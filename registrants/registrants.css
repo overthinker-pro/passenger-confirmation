@@ -247,23 +247,6 @@ body::before {
   color: var(--cyan);
 }
 
-.date-entries {
-  display: grid;
-  gap: 14px;
-}
-
-.date-entries__head {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.date-entries__head h3 {
-  margin: 0;
-  font-size: clamp(1.2rem, 3vw, 1.6rem);
-}
-
 .list-card__head {
   display: flex;
   align-items: flex-start;
