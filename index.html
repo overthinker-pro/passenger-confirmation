@@ -1,92 +1,131 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Coming Soon</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bethany Tour 2026</title>
+    <meta
+      name="description"
+      content="Bethany Tour 2026 registration summary."
+    />
+    <link rel="stylesheet" href="closed.css" />
+  </head>
+  <body>
+    <main class="single-page" data-adults="15" data-students="11">
+      <section class="hero-card" aria-labelledby="tour-title">
+        <p class="eyebrow">Bethany Tour 2026</p>
+        <h1 id="tour-title">Bethany Sunday School Tour 2026</h1>
+        <p class="trail-name">Coastal Heritage Trail</p>
+        <p class="hero-status">Registrations are now closed.</p>
+        <p class="hero-note">
+          We have reached the maximum capacity. Thank you to everyone who registered and reserved your place for the tour.
+        </p>
+      </section>
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Comic Sans MS', 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #6ee7b7, #3b82f6);
-      color: #fff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      text-align: center;
-    }
+      <section class="poll-card" aria-labelledby="date-poll-title">
+        <div class="section-copy">
+          <p class="eyebrow eyebrow-soft">Date Poll</p>
+          <h2 id="date-poll-title">Which tour date feels best for you?</h2>
+          <p class="poll-note">
+            This is a quick opinion poll only. Choose the date that works best for your family.
+          </p>
+        </div>
 
-    .container {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 40px 25px;
-      border-radius: 20px;
-      backdrop-filter: blur(10px);
-      max-width: 400px;
-      width: 90%;
-    }
+        <form class="poll-form" id="date-poll-form">
+          <label class="poll-option">
+            <input type="radio" name="selectedDate" value="Wednesday" required />
+            <span>May 20th Wednesday</span>
+          </label>
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
+          <label class="poll-option">
+            <input type="radio" name="selectedDate" value="Thursday" />
+            <span>May 21st Thursday</span>
+          </label>
 
-    p {
-      font-size: 1.1rem;
-      margin-bottom: 25px;
-    }
+          <label class="poll-option">
+            <input type="radio" name="selectedDate" value="Friday" />
+            <span>May 22nd Friday</span>
+          </label>
 
-    .emoji {
-      font-size: 60px;
-      margin-bottom: 15px;
-    }
+          <button type="submit" class="poll-submit" id="poll-submit">
+            <span class="poll-submit__spinner" aria-hidden="true"></span>
+            <span class="poll-submit__label">Submit Date Preference</span>
+          </button>
+          <p class="poll-status" id="poll-status" aria-live="polite"></p>
+        </form>
+      </section>
 
-    .footer {
-      font-size: 0.85rem;
-      opacity: 0.8;
-      margin-top: 20px;
-    }
+      <section class="count-card" aria-labelledby="count-title">
+        <div class="section-copy">
+          <h2 id="count-title">Final Registration Count</h2>
+          <p class="status-text" id="status-text" aria-live="polite">
+            Loading total number of registrations...
+          </p>
+        </div>
 
-    .bounce {
-      animation: bounce 1.5s infinite;
-    }
+        <div class="count-grid" aria-label="Registration counts">
+          <article class="count-item">
+            <span class="count-label">Adults</span>
+            <strong class="count-value" id="adult-count">0</strong>
+          </article>
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+          <article class="count-item">
+            <span class="count-label">Students</span>
+            <strong class="count-value" id="student-count">0</strong>
+          </article>
 
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      background: #fff;
-      color: #3b82f6;
-      border-radius: 30px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: 0.3s;
-    }
+          <article class="count-item count-item-total">
+            <span class="count-label">Total</span>
+            <strong class="count-value" id="total-count">0</strong>
+          </article>
+        </div>
+      </section>
 
-    .button:hover {
-      background: #facc15;
-      color: #000;
-    }
-  </style>
-</head>
-<body>
+      <footer class="page-footer">
+        <button type="button" class="admin-access" id="admin-access">
+          Admin Access
+        </button>
+      </footer>
+    </main>
 
-  <div class="container">
-    <div class="emoji bounce">🚧✨</div>
-    <h1>Coming Soon!</h1>
-    <p>Our page is currently under construction, we'll be back soon! 🎉</p>
+    <div class="auth-modal" id="auth-modal" hidden>
+      <div class="auth-modal__backdrop" data-close-auth="true"></div>
+      <div
+        class="auth-modal__dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-title"
+      >
+        <button
+          type="button"
+          class="auth-modal__close"
+          id="auth-close"
+          aria-label="Close admin access"
+        >
+          x
+        </button>
+        <p class="eyebrow eyebrow-soft">Admin Access</p>
+        <h2 id="auth-title">Sign in to continue</h2>
+        <form class="auth-form" id="auth-form">
+          <label class="auth-label" for="auth-id">ID</label>
+          <input class="auth-input" id="auth-id" name="auth-id" type="text" required />
 
-    <a href="#" class="button">Check Back Later</a>
+          <label class="auth-label" for="auth-password">Password</label>
+          <input
+            class="auth-input"
+            id="auth-password"
+            name="auth-password"
+            type="password"
+            required
+          />
 
-    <div class="footer">
-      Thanks for your patience!
+          <p class="auth-error" id="auth-error" aria-live="polite"></p>
+
+          <button type="submit" class="auth-submit">Open Member List</button>
+        </form>
+      </div>
     </div>
-  </div>
 
-</body>
+    <script src="closed.js"></script>
+  </body>
 </html>
