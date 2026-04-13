@@ -19,6 +19,27 @@ const ADMIN_PASSWORD = "BETH2026";
 const DATES_URL =
   "https://script.google.com/macros/s/AKfycbzXeEA2TxprwUiwWkdZzp-yGDxdsjvZK9bJbbccw5av50gptw46aQjM-gfcOwOYM43l/exec";
 
+/**
+ * Sends poll data to Apps Script using no-cors mode.
+ * @param {{sheetName: string, timeStamp: string, selectedDate: string, deviceID: string}} payload
+ * @returns {Promise<void>}
+ */
+async function submitDatePreference(payload) {
+  const requestBody = new URLSearchParams(payload).toString();
+  
+  await fetch(DATES_URL, {
+    method: "POST",
+    mode: "no-cors",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: requestBody,
+    
+    
+  });
+  
+}
+
 function updateCounts(adults, students) {
   if (adultCountElement) {
     adultCountElement.textContent = String(adults);
@@ -187,31 +208,7 @@ if (datePollForm) {
     setPollStatus("Submitting your preference...");
 
     try {
-      const response = await fetch(DATES_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "text/plain;charset=utf-8",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Request failed with status ${response.status}`);
-      }
-
-      const responseText = await response.text();
-      let result = null;
-
-      try {
-        result = JSON.parse(responseText);
-      } catch (error) {
-        throw new Error("Apps Script did not return valid JSON.");
-      }
-
-      if (!result || result.success !== true) {
-        throw new Error(result?.message || "Apps Script did not confirm that the vote was saved.");
-      }
-
+      await submitDatePreference(payload);
       datePollForm.reset();
       setPollStatus("Thank you. Your date preference was recorded.", "is-success");
     } catch (error) {
