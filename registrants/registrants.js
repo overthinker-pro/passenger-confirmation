@@ -438,3 +438,13 @@ if (fetchForm) {
 if (dateFetchForm) {
   dateFetchForm.addEventListener("submit", handleDateFetch);
 }
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", () => {
+    if (dateFetchForm) {
+      void handleDateFetch(new Event("submit"));
+    }
+  });
+} else if (dateFetchForm) {
+  void handleDateFetch(new Event("submit"));
+}
