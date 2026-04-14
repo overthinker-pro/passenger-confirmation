@@ -150,6 +150,12 @@ function normalizeNameEntry(entry) {
   return possibleName ? possibleName.trim() : "";
 }
 
+function collectPossibleNames(values) {
+  return values
+    .filter((value) => typeof value === "string" && value.trim())
+    .map((value) => value.trim());
+}
+
 function extractArrayPayload(payload) {
   if (Array.isArray(payload)) {
     return payload;
@@ -192,6 +198,28 @@ function splitStructuredRows(rows) {
       ?.trim()
       .toLowerCase();
 
+    const rowAdults = collectPossibleNames([
+      row.adultName,
+      row.adult,
+      row.adults,
+      row.Adult,
+      row.Adults,
+    ]);
+
+    const rowStudents = collectPossibleNames([
+      row.studentName,
+      row.student,
+      row.students,
+      row.Student,
+      row.Students,
+    ]);
+
+    if (rowAdults.length || rowStudents.length) {
+      adults.push(...rowAdults);
+      students.push(...rowStudents);
+      return;
+    }
+
     if (!name || !typeValue) {
       return;
     }
@@ -221,8 +249,27 @@ function parseRegistrants(payload) {
     ? payload.students.map(normalizeNameEntry).filter(Boolean)
     : [];
 
-  if (directAdults.length || directStudents.length) {
-    return { adults: directAdults, students: directStudents };
+  const objectAdults = collectPossibleNames([
+    payload.adultName,
+    payload.adult,
+    payload.Adult,
+  ]);
+  const objectStudents = collectPossibleNames([
+    payload.studentName,
+    payload.student,
+    payload.Student,
+  ]);
+
+  if (
+    directAdults.length ||
+    directStudents.length ||
+    objectAdults.length ||
+    objectStudents.length
+  ) {
+    return {
+      adults: [...directAdults, ...objectAdults],
+      students: [...directStudents, ...objectStudents],
+    };
   }
 
   const rows = extractArrayPayload(payload);
