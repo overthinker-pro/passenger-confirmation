@@ -34,29 +34,6 @@ body {
     z-index: -1;
 }
 
-.top-nav {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: 1rem 2rem;
-    background: rgba(11, 16, 32, 0.9);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--glass-border);
-}
-
-.back-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--accent-cyan);
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: opacity 0.2s;
-}
-
-.back-btn:hover { opacity: 0.8; }
-
 .content-wrapper {
     max-width: 1000px;
     margin: 2rem auto;
@@ -188,4 +165,23 @@ body {
         flex-wrap: wrap;
     }
     .fact-card { flex: 1; min-width: 140px; }
+}
+
+.view-members {
+    text-align: center;
+}
+
+.view-members a {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.2rem;
+    background: var(--accent-cyan);
+    color: #0b1020;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+.view-members a:hover {
+    background: #61e8ffcc;
 }
