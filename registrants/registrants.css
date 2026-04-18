@@ -403,3 +403,8 @@ body::before {
   filter: saturate(1.05);
   outline: none;
 }
+
+.instruction-page button a {
+  color: inherit;
+  text-decoration: none;
+}
