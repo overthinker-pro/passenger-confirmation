@@ -369,3 +369,37 @@ body::before {
     transform: rotate(360deg);
   }
 }
+
+
+.instruction-page {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+}
+.instruction-page button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 52px;
+  padding: 0 22px;
+  border: 1px solid rgba(97, 232, 255, 0.24);
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(97, 232, 255, 0.92), rgba(119, 241, 203, 0.86));
+  color: #06111d;
+  font: inherit;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+.instruction-page button:hover,
+.instruction-page button:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 30px rgba(187, 255, 116, 0.2);
+  filter: saturate(1.05);
+  outline: none;
+}
