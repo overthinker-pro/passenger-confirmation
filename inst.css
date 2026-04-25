@@ -220,18 +220,6 @@ body::before {
   font-weight: 800;
 }
 
-.info-section ol {
-  display: grid;
-  gap: 12px;
-  margin-left: 1.3rem;
-  color: var(--muted);
-}
-
-.info-section li::marker {
-  color: var(--gold);
-  font-weight: 800;
-}
-
 .gear-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
