@@ -1,16 +1,9 @@
-const fetchForm = document.getElementById("fetch-form");
-const fetchButton = document.getElementById("fetch-button");
+const fetchLoader = document.getElementById("fetch-loader");
 const fetchStatus = document.getElementById("fetch-status");
 const adultList = document.getElementById("adult-list");
 const studentList = document.getElementById("student-list");
 const adultTotal = document.getElementById("adult-total");
 const studentTotal = document.getElementById("student-total");
-const dateFetchForm = document.getElementById("date-fetch-form");
-const dateFetchButton = document.getElementById("date-fetch-button");
-const dateFetchStatus = document.getElementById("date-fetch-status");
-const dateWednesdayTotal = document.getElementById("date-wednesday-total");
-const dateThursdayTotal = document.getElementById("date-thursday-total");
-const dateFridayTotal = document.getElementById("date-friday-total");
 const REGISTRANTS_URL =
   "https://script.google.com/macros/s/AKfycby-Ce9VosopaqR8WT1fF4w7FL5sNOZGACp0WYETihAfYE3pss4ZAIjv9VIMo8eIuLWU/exec";
 
@@ -28,34 +21,12 @@ function setStatus(message, tone = "") {
 }
 
 function setLoadingState(isLoading) {
-  if (!fetchButton) {
+  if (!fetchLoader) {
     return;
   }
 
-  fetchButton.classList.toggle("is-loading", isLoading);
-  fetchButton.disabled = isLoading;
-}
-
-function setDateStatus(message, tone = "") {
-  if (!dateFetchStatus) {
-    return;
-  }
-
-  dateFetchStatus.textContent = message;
-  dateFetchStatus.classList.remove("is-error", "is-success");
-
-  if (tone) {
-    dateFetchStatus.classList.add(tone);
-  }
-}
-
-function setDateLoadingState(isLoading) {
-  if (!dateFetchButton) {
-    return;
-  }
-
-  dateFetchButton.classList.toggle("is-loading", isLoading);
-  dateFetchButton.disabled = isLoading;
+  fetchLoader.hidden = !isLoading;
+  fetchLoader.setAttribute("aria-hidden", String(!isLoading));
 }
 
 function escapeHtml(value) {
@@ -92,39 +63,6 @@ function updateSummary(adults, students) {
 
   if (studentTotal) {
     studentTotal.textContent = String(students.length);
-  }
-}
-
-function updateDateSummary(rows) {
-  const totals = {
-    Wednesday: 0,
-    Thursday: 0,
-    Friday: 0,
-  };
-
-  rows.forEach((row) => {
-    if (!row || typeof row !== "object") {
-      return;
-    }
-
-    const rawDate = typeof row.selectedDate === "string" ? row.selectedDate.trim() : "";
-    if (rawDate === "Wednesday") {
-      totals.Wednesday += 1;
-    } else if (rawDate === "Thursday") {
-      totals.Thursday += 1;
-    } else if (rawDate === "Friday") {
-      totals.Friday += 1;
-    }
-  });
-
-  if (dateWednesdayTotal) {
-    dateWednesdayTotal.textContent = String(totals.Wednesday);
-  }
-  if (dateThursdayTotal) {
-    dateThursdayTotal.textContent = String(totals.Thursday);
-  }
-  if (dateFridayTotal) {
-    dateFridayTotal.textContent = String(totals.Friday);
   }
 }
 
@@ -284,64 +222,6 @@ function parseRegistrants(payload) {
   );
 }
 
-function parseDateRows(payload) {
-  if (payload && typeof payload === "object") {
-    const looksLikeRegistrantPayload =
-      Array.isArray(payload.adults) || Array.isArray(payload.students);
-
-    if (looksLikeRegistrantPayload) {
-      throw new Error(
-        "The Apps Script is still returning the registrant list. Update doGet() to handle sheetName=Date.",
-      );
-    }
-  }
-
-  const rows = extractArrayPayload(payload);
-
-  if (!rows.length) {
-    throw new Error("No date preferences were returned.");
-  }
-
-  const normalizedRows = rows
-    .map((row) => {
-      if (!row || typeof row !== "object") {
-        return null;
-      }
-
-      const selectedDate =
-        typeof row.selectedDate === "string"
-          ? row.selectedDate.trim()
-          : typeof row.date === "string"
-            ? row.date.trim()
-            : "";
-      const timeStamp =
-        typeof row.timeStamp === "string"
-          ? row.timeStamp.trim()
-          : typeof row.timestamp === "string"
-            ? row.timestamp.trim()
-            : "";
-      const deviceID =
-        typeof row.deviceID === "string"
-          ? row.deviceID.trim()
-          : typeof row.deviceId === "string"
-            ? row.deviceId.trim()
-            : "";
-
-      if (!selectedDate) {
-        return null;
-      }
-
-      return { selectedDate, timeStamp, deviceID };
-    })
-    .filter(Boolean);
-
-  if (!normalizedRows.length) {
-    throw new Error("The date responses were received, but the selected dates could not be read.");
-  }
-
-  return normalizedRows;
-}
-
 async function fetchRegistrants(url) {
   const response = await fetch(url, {
     method: "GET",
@@ -370,31 +250,9 @@ async function fetchRegistrants(url) {
   return parseRegistrants(payload);
 }
 
-async function fetchDatePreferences(url) {
-  const response = await fetch(`${url}?sheetName=Date`, {
-    method: "GET",
-    cache: "no-store",
-  });
-
-  if (!response.ok) {
-    throw new Error("The date preferences could not be loaded right now.");
-  }
-
-  const contentType = response.headers.get("content-type") || "";
-
-  if (!contentType.includes("application/json")) {
-    throw new Error("The date preference list is not available in the expected format yet.");
-  }
-
-  const payload = await response.json();
-  return parseDateRows(payload);
-}
-
-async function handleFetch(event) {
-  event.preventDefault();
-
+async function loadRegisteredNames() {
   setLoadingState(true);
-  setStatus("Loading the registered names...");
+  setStatus("");
 
   try {
     const { adults, students } = await fetchRegistrants(REGISTRANTS_URL);
@@ -402,7 +260,7 @@ async function handleFetch(event) {
     renderNameList(adultList, adults, "No adult names were returned.");
     renderNameList(studentList, students, "No student names were returned.");
     updateSummary(adults, students);
-    setStatus("The registered names are ready to view.", "is-success");
+    setStatus("");
   } catch (error) {
     renderNameList(adultList, [], "No adult names loaded yet.");
     renderNameList(studentList, [], "No student names loaded yet.");
@@ -413,38 +271,10 @@ async function handleFetch(event) {
   }
 }
 
-async function handleDateFetch(event) {
-  event.preventDefault();
-
-  setDateLoadingState(true);
-  setDateStatus("Loading the submitted date preferences...");
-
-  try {
-    const rows = await fetchDatePreferences(REGISTRANTS_URL);
-    updateDateSummary(rows);
-    setDateStatus("The date preferences are ready to view.", "is-success");
-  } catch (error) {
-    updateDateSummary([]);
-    setDateStatus(error.message, "is-error");
-  } finally {
-    setDateLoadingState(false);
-  }
-}
-
-if (fetchForm) {
-  fetchForm.addEventListener("submit", handleFetch);
-}
-
-if (dateFetchForm) {
-  dateFetchForm.addEventListener("submit", handleDateFetch);
-}
-
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", () => {
-    if (dateFetchForm) {
-      void handleDateFetch(new Event("submit"));
-    }
+    void loadRegisteredNames();
   });
-} else if (dateFetchForm) {
-  void handleDateFetch(new Event("submit"));
+} else {
+  void loadRegisteredNames();
 }

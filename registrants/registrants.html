@@ -9,30 +9,48 @@
       content="Fetch and view Bethany Tour registrants from Google Sheets."
     />
     <link rel="stylesheet" href="registrants.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
+    <div
+      class="page-loader"
+      id="fetch-loader"
+      role="status"
+      aria-hidden="false"
+    >
+      <div class="page-loader__mark" aria-hidden="true">
+        <span class="page-loader__ring"></span>
+        <span class="page-loader__ring page-loader__ring--two"></span>
+        <span class="page-loader__monogram">B</span>
+      </div>
+      <div class="page-loader__copy">
+        <span class="page-loader__eyebrow">Bethany Tour 2026</span>
+        <strong>Preparing member list</strong>
+      </div>
+      <div class="page-loader__bar" aria-hidden="true"></div>
+    </div>
+
     <main class="registrants-page">
       <section class="welcome-hero" aria-labelledby="fetch-title">
+        <a class="back-home" href="../index.html" aria-label="Go back to homepage">
+          <span aria-hidden="true">←</span>
+        </a>
+
         <div class="welcome-hero__copy">
           <p class="welcome-kicker">Bethany Tour 2026</p>
           <h1>Registered Members</h1>
           <p class="welcome-lead">
-            View the final list of registered adults and students for the tour in
-            one place.
+            View the final list of registered adults and students for the tour
+            in one place.
           </p>
         </div>
 
         <div class="welcome-hero__action">
-          <form class="fetch-form" id="fetch-form">
-            <button type="submit" class="fetch-button" id="fetch-button">
-              <span
-                class="fetch-button__spinner"
-                id="fetch-spinner"
-                aria-hidden="true"
-              ></span>
-              <span class="fetch-button__label">Load Registered Names</span>
-            </button>
-          </form>
           <p class="fetch-status" id="fetch-status" aria-live="polite"></p>
         </div>
       </section>
@@ -63,42 +81,6 @@
             <li class="empty-state">No student names loaded yet.</li>
           </ol>
         </article>
-      </section>
-
-      <section class="date-panel" aria-labelledby="date-fetch-title">
-        <div class="date-panel__head">
-          <div>
-            <p class="panel-label">Date Poll</p>
-            <h2 id="date-fetch-title">Tour Date Preferences</h2>
-            <p class="date-panel__lead">
-              Here are the date preferences submitted by registrants.
-            </p>
-          </div>
-
-          <form class="fetch-form" id="date-fetch-form">
-          </form>
-        </div>
-
-        <p class="fetch-status" id="date-fetch-status" aria-live="polite"></p>
-
-        <div class="date-summary-grid" aria-label="Date preference totals">
-          <article class="date-summary-card">
-            <span class="date-summary-card__label">May 20th Wednesday</span>
-            <strong class="date-summary-card__value" id="date-wednesday-total">0</strong>
-          </article>
-          <article class="date-summary-card">
-            <span class="date-summary-card__label">May 21st Thursday</span>
-            <strong class="date-summary-card__value" id="date-thursday-total">0</strong>
-          </article>
-          <article class="date-summary-card">
-            <span class="date-summary-card__label">May 22nd Friday</span>
-            <strong class="date-summary-card__value" id="date-friday-total">0</strong>
-          </article>
-        </div>
-      </section>
-
-      <section class="instruction-page">
-        <button><a href="../instructions/inst.html">View Instructions</a></button>
       </section>
     </main>
 
