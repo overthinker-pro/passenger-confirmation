@@ -243,7 +243,9 @@ async function fetchRegistrants(url) {
       );
     }
 
-    throw new Error("The member list is not available in the expected format yet.");
+    throw new Error(
+      "The member list is not available in the expected format yet.",
+    );
   }
 
   const payload = await response.json();
