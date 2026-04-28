@@ -1,3 +1,4 @@
+const { useSyncExternalStore } = require("react");
 const fetchLoader = document.getElementById("fetch-loader");
 const fetchStatus = document.getElementById("fetch-status");
 const adultList = document.getElementById("adult-list");
