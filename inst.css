@@ -315,7 +315,11 @@ body::before {
   padding: 18px 20px;
   border: 1px solid rgba(23, 61, 48, 0.14);
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(244, 234, 216, 0.72), rgba(255, 255, 255, 0.86));
+  background: linear-gradient(
+    135deg,
+    rgba(244, 234, 216, 0.72),
+    rgba(255, 255, 255, 0.86)
+  );
   color: var(--green-deep);
   font-weight: 700;
   text-align: center;
