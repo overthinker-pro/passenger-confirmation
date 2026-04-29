@@ -69,8 +69,16 @@ function updateSummary(adults, students) {
 }
 
 function renderRegistrants(registrants) {
-  renderNameList(adultList, registrants.adults, "No adult names were returned.");
-  renderNameList(studentList, registrants.students, "No student names were returned.");
+  renderNameList(
+    adultList,
+    registrants.adults,
+    "No adult names were returned.",
+  );
+  renderNameList(
+    studentList,
+    registrants.students,
+    "No student names were returned.",
+  );
   updateSummary(registrants.adults, registrants.students);
 }
 
@@ -82,7 +90,11 @@ function readCachedRegistrants() {
     }
 
     const parsed = JSON.parse(cached);
-    if (!parsed || !Array.isArray(parsed.adults) || !Array.isArray(parsed.students)) {
+    if (
+      !parsed ||
+      !Array.isArray(parsed.adults) ||
+      !Array.isArray(parsed.students)
+    ) {
       return null;
     }
 
