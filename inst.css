@@ -167,6 +167,37 @@ body::before {
   font-weight: 600;
 }
 
+.payment-card p {
+  display: flex;
+  min-height: 2.2rem;
+  align-items: center;
+  color: var(--green-deep);
+  font-size: clamp(1.35rem, 4vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.15;
+}
+
+.amount-loader {
+  display: inline-block;
+  width: 1.35rem;
+  height: 1.35rem;
+  border: 2px solid rgba(23, 61, 48, 0.16);
+  border-top-color: var(--green-deep);
+  border-radius: 50%;
+  animation: amount-loader-turn 0.8s linear infinite;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .spots-list {
   display: grid;
   gap: 7px;
@@ -440,5 +471,11 @@ body::before {
   .quick-facts {
     position: static;
     grid-template-columns: 1fr;
+  }
+}
+
+@keyframes amount-loader-turn {
+  to {
+    transform: rotate(360deg);
   }
 }
