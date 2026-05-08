@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="112" fill="#173d30" />
+  <circle cx="256" cy="256" r="182" fill="#f4ead8" opacity="0.95" />
+  <circle cx="256" cy="256" r="150" fill="none" stroke="#b78a45" stroke-width="12" />
+  <text
+    x="256"
+    y="304"
+    fill="#173d30"
+    font-family="Georgia, serif"
+    font-size="176"
+    font-weight="700"
+    text-anchor="middle"
+  >B</text>
+</svg>

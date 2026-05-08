@@ -8,6 +8,10 @@
       name="description"
       content="Bethany Sunday School Tour 2026 instructions and tour information."
     />
+    <meta name="theme-color" content="#173d30" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="icon" href="icons/app-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/app-icon-192.png" />
     <link rel="stylesheet" href="inst.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,6 +31,9 @@
           Everything you need to know for the Bethany Sunday School Tour 2026:
           Coastal Heritage Trail.
         </p>
+        <button class="install-app-button" id="install-app" type="button" hidden>
+          Install App
+        </button>
       </header>
 
       <div class="info-layout">
@@ -199,6 +206,8 @@
       const totalPaymentElement = document.getElementById(
         "total-payment-received",
       );
+      const installAppButton = document.getElementById("install-app");
+      let deferredInstallPrompt = null;
 
       function formatIndianRupees(amount) {
         return new Intl.NumberFormat("en-IN", {
@@ -245,6 +254,44 @@
       } else {
         void loadTotalPaymentReceived();
       }
+
+      if ("serviceWorker" in navigator && window.isSecureContext) {
+        window.addEventListener("load", () => {
+          void navigator.serviceWorker
+            .register("./service-worker.js")
+            .catch(() => {});
+        });
+      }
+
+      window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        deferredInstallPrompt = event;
+
+        if (installAppButton) {
+          installAppButton.hidden = false;
+        }
+      });
+
+      if (installAppButton) {
+        installAppButton.addEventListener("click", async () => {
+          if (!deferredInstallPrompt) {
+            return;
+          }
+
+          deferredInstallPrompt.prompt();
+          await deferredInstallPrompt.userChoice;
+          deferredInstallPrompt = null;
+          installAppButton.hidden = true;
+        });
+      }
+
+      window.addEventListener("appinstalled", () => {
+        deferredInstallPrompt = null;
+
+        if (installAppButton) {
+          installAppButton.hidden = true;
+        }
+      });
     </script>
   </body>
 </html>

@@ -119,6 +119,42 @@ body::before {
   font-size: clamp(1rem, 2vw, 1.12rem);
 }
 
+.install-app-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  margin-top: 22px;
+  padding: 0 18px;
+  border: 1px solid rgba(23, 61, 48, 0.18);
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--green-deep), var(--green));
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 16px 34px rgba(23, 61, 48, 0.2);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.install-app-button[hidden] {
+  display: none;
+}
+
+.install-app-button:hover,
+.install-app-button:focus-visible {
+  box-shadow: 0 20px 42px rgba(23, 61, 48, 0.26);
+  filter: saturate(1.06);
+  transform: translateY(-2px);
+  outline: none;
+}
+
 .info-layout {
   display: grid;
   grid-template-columns: 280px minmax(0, 1fr);
